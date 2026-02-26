@@ -161,23 +161,7 @@
             border-color: var(--accent);
         }
 
-        .timeline-item:nth-child(odd) .timeline-content {
-            grid-column: 1;
-            text-align: right;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content {
-            grid-column: 3;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-illustration {
-            grid-column: 3;
-        }
-
-        .timeline-item:nth-child(even) .timeline-illustration {
-            grid-column: 1;
-            grid-row: 1;
-        }
+        /* Positioning handled in timeline-title-box section */
 
         .timeline-node {
             grid-column: 2;
@@ -196,11 +180,6 @@
             position: relative;
             z-index: 1;
             align-self: center;
-        }
-
-        .timeline-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.75rem;
         }
 
         .timeline-content > p {
@@ -223,10 +202,6 @@
             letter-spacing: 0.05em;
         }
 
-        .timeline-item:nth-child(odd) .timeline-details h4 {
-            text-align: right;
-        }
-
         .timeline-details ul {
             list-style: none;
             display: flex;
@@ -242,30 +217,57 @@
             color: var(--text-body);
         }
 
-        .timeline-item:nth-child(odd) .timeline-details li {
-            justify-content: flex-end;
-        }
-
         .timeline-details li::before {
             content: '+';
             color: var(--accent);
             font-weight: bold;
         }
 
-        .timeline-item:nth-child(odd) .timeline-details li::before {
+        /* Even items (2, 4): content on left, so right-align text */
+        .timeline-item:nth-child(even) .timeline-details h4 {
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-details li {
+            justify-content: flex-end;
+        }
+
+        .timeline-item:nth-child(even) .timeline-details li::before {
             order: 1;
         }
 
-        .timeline-illustration {
+        .timeline-title-box {
             background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--surface);
+            padding: 2rem;
             min-height: 100px;
+        }
+
+        .timeline-title-box h3 {
+            font-size: 1.4rem;
+            color: var(--surface);
+            margin: 0;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-title-box {
+            grid-column: 1;
+        }
+
+        .timeline-item:nth-child(even) .timeline-title-box {
+            grid-column: 3;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            grid-column: 3;
+            text-align: left;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            grid-column: 1;
+            text-align: right;
         }
 
         /* FAQ */
@@ -492,8 +494,9 @@
     <section class="timeline-section">
         <div class="timeline">
             <div class="timeline-item">
+                <div class="timeline-title-box"><h3>Discovery Call</h3></div>
+                <div class="timeline-node">1</div>
                 <div class="timeline-content">
-                    <h3>Discovery Call</h3>
                     <p>We hop on a 30-minute call. You walk me through your typical day, your frustrations, and where you feel like you're wasting time. No prep needed.</p>
                     <div class="timeline-details">
                         <h4>What we cover</h4>
@@ -505,13 +508,10 @@
                         </ul>
                     </div>
                 </div>
-                <div class="timeline-node">1</div>
-                <div class="timeline-illustration">30 min call</div>
             </div>
 
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <h3>Diagnosis</h3>
                     <p>I take what I learned and identify exactly where AI can help. Not everything should be automated, and I'll be honest about what's worth it and what's not.</p>
                     <div class="timeline-details">
                         <h4>What you get</h4>
@@ -524,13 +524,14 @@
                     </div>
                 </div>
                 <div class="timeline-node">2</div>
-                <div class="timeline-illustration">Custom plan</div>
+                <div class="timeline-title-box"><h3>Diagnosis</h3></div>
             </div>
 
             <div class="timeline-item">
+                <div class="timeline-title-box"><h3>Implementation</h3></div>
+                <div class="timeline-node">3</div>
                 <div class="timeline-content">
-                    <h3>Implementation</h3>
-                    <p>I build your custom automation. You'll see progress along the way, not just a final delivery after weeks of silence. Most projects take 1-2 weeks.</p>
+                    <p>I build your custom automation. You'll see progress along the way, not just a final delivery after weeks of silence.</p>
                     <div class="timeline-details">
                         <h4>How it works</h4>
                         <ul>
@@ -541,13 +542,10 @@
                         </ul>
                     </div>
                 </div>
-                <div class="timeline-node">3</div>
-                <div class="timeline-illustration">1-2 weeks</div>
             </div>
 
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <h3>Handoff</h3>
                     <p>You get everything: the automation, documentation, and a walkthrough so you understand how it works. You own it completely, no lock-in, no dependency on me.</p>
                     <div class="timeline-details">
                         <h4>What's included</h4>
@@ -559,7 +557,7 @@
                     </div>
                 </div>
                 <div class="timeline-node">4</div>
-                <div class="timeline-illustration">You own it</div>
+                <div class="timeline-title-box"><h3>Handoff</h3></div>
             </div>
         </div>
     </section>
@@ -645,8 +643,8 @@
                 immediateRender: false,
                 scrollTrigger: { trigger: item, start: 'top 80%' }
             });
-            if (item.querySelector('.timeline-illustration')) {
-                gsap.from(item.querySelector('.timeline-illustration'), {
+            if (item.querySelector('.timeline-title-box')) {
+                gsap.from(item.querySelector('.timeline-title-box'), {
                     x: -direction, opacity: 0, duration: 0.8, delay: 0.1, ease: 'power3.out',
                     immediateRender: false,
                     scrollTrigger: { trigger: item, start: 'top 80%' }

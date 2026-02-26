@@ -220,168 +220,158 @@
             50% { transform: rotate(45deg) translateY(8px); }
         }
 
-        .contrast-section {
+        /* Process Section - THE MAIN OFFER */
+        .process-section {
             padding: 6rem 3rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            align-items: center;
-        }
-
-        .contrast-card {
-            padding: 3rem;
-            border-radius: 24px;
-            position: relative;
-        }
-
-        .contrast-card.chaos {
             background: var(--surface);
-            border: 1px solid var(--border);
         }
 
-        .contrast-card.flow {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-            color: var(--surface);
-        }
-
-        .contrast-card.flow h3,
-        .contrast-card.flow p { color: var(--surface); }
-
-        .contrast-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 1rem;
-            opacity: 0.7;
-        }
-
-        .contrast-card h3 {
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .task-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .task-list li {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1rem;
-        }
-
-        .task-list.crossed li {
-            text-decoration: line-through;
-            opacity: 0.6;
-        }
-
-        .task-list li .icon {
-            font-size: 1rem;
-            font-weight: bold;
-            width: 20px;
+        .process-header {
             text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
         }
 
-        .task-list.crossed li .icon { color: #e74c3c; }
-        .contrast-card.flow .task-list li .icon { color: var(--accent-light); }
-
-        .contrast-card.flow .task-list li {
-            text-decoration: none;
-            opacity: 1;
-        }
-
-        .horizontal-section {
-            padding: 6rem 0;
-            background: var(--surface);
-            position: relative;
-        }
-
-        .horizontal-header {
-            padding: 0 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .horizontal-header h2 {
+        .process-header h2 {
             font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
 
-        .horizontal-header p {
+        .process-header p {
+            font-size: 1.15rem;
+            color: var(--text-body);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            background: var(--bg);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .process-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(90, 139, 184, 0.15);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--surface);
+            margin: 0 auto 1.5rem;
+        }
+
+        .process-step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .process-step p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .process-arrow {
+            position: absolute;
+            right: -1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .process-step:last-child .process-arrow {
+            display: none;
+        }
+
+        /* Examples Section */
+        .examples-section {
+            padding: 6rem 3rem;
+        }
+
+        .examples-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .examples-header h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 0.75rem;
+        }
+
+        .examples-header p {
             color: var(--text-muted);
             font-size: 1.1rem;
         }
 
-        .horizontal-wrapper {
-            overflow: hidden;
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
-        .horizontal-track {
-            display: flex;
-            gap: 2rem;
-            padding: 0 3rem;
-            width: max-content;
-        }
-
-        .service-card {
-            width: 380px;
-            flex-shrink: 0;
-            background: var(--bg);
-            border-radius: 20px;
-            padding: 2.5rem;
+        .example-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 2rem;
             border: 1px solid var(--border);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
         }
 
-        .service-card:hover {
-            transform: translateY(-8px) rotate(1deg);
-            box-shadow: 0 20px 60px rgba(90, 139, 184, 0.15);
+        .example-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(90, 139, 184, 0.1);
             border-color: var(--accent);
         }
 
-        .service-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--surface);
-            margin-bottom: 1.5rem;
+        .example-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
         }
 
-        .service-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .service-card p {
+        .example-card p {
             color: var(--text-muted);
             font-size: 0.95rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .service-tag {
+        .example-tag {
             display: inline-block;
             background: var(--accent-light);
             color: var(--accent-dark);
-            padding: 0.35rem 0.85rem;
+            padding: 0.3rem 0.75rem;
             border-radius: 100px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
         }
 
+        /* Demo Section */
         .demo-section {
-            padding: 8rem 3rem;
+            padding: 6rem 3rem;
+            background: var(--surface);
             position: relative;
         }
 
@@ -452,6 +442,7 @@
         .demo-glow.left { left: -200px; top: 50%; transform: translateY(-50%); }
         .demo-glow.right { right: -200px; top: 50%; transform: translateY(-50%); }
 
+        /* Manifesto */
         .manifesto {
             padding: 6rem 3rem;
             background: var(--text-dark);
@@ -470,7 +461,7 @@
 
         .manifesto blockquote {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(1.75rem, 4vw, 3rem);
+            font-size: clamp(1.5rem, 3.5vw, 2.5rem);
             font-weight: 600;
             color: var(--surface);
             line-height: 1.4;
@@ -483,20 +474,20 @@
             font-size: 1rem;
         }
 
+        /* CTA Section */
         .cta-section {
-            padding: 8rem 3rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1200px;
+            padding: 6rem 3rem;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 700px;
             margin: 0 auto;
-            align-items: center;
         }
 
         .cta-content h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
         }
 
         .cta-content p {
@@ -505,55 +496,7 @@
             margin-bottom: 2rem;
         }
 
-        .cta-card {
-            background: var(--surface);
-            padding: 3rem;
-            border-radius: 24px;
-            border: 1px solid var(--border);
-            box-shadow: 0 20px 60px rgba(90, 139, 184, 0.1);
-        }
-
-        .cta-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .cta-card .title {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--bg);
-            border-radius: 12px;
-            margin-bottom: 0.75rem;
-            transition: all 0.3s;
-            color: var(--text-dark);
-            font-weight: 500;
-        }
-
-        .contact-link:hover {
-            background: var(--accent-light);
-            transform: translateX(5px);
-        }
-
-        .contact-link .icon {
-            width: 40px;
-            height: 40px;
-            background: var(--surface);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--accent);
-        }
-
+        /* Footer */
         footer {
             padding: 3rem;
             text-align: center;
@@ -588,62 +531,33 @@
             font-size: 0.85rem;
         }
 
-        @media (max-width: 1024px) {
-            .contrast-section,
-            .cta-section {
+        @media (max-width: 900px) {
+            .process-steps {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                max-width: 400px;
             }
 
-            .horizontal-track {
-                padding: 0 1.5rem;
+            .process-arrow {
+                display: none;
             }
-
-            .service-card { width: 320px; }
         }
 
         @media (max-width: 768px) {
-            nav {
-                padding: 1rem 1.5rem;
-            }
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { gap: 1.5rem; }
+            .nav-links a:not(.nav-cta) { display: none; }
 
-            .nav-links {
-                gap: 1.5rem;
-            }
+            .hero { padding: 7rem 1.5rem 4rem; }
+            .hero-subtitle { font-size: 1.1rem; }
 
-            .nav-links a:not(.nav-cta) {
-                display: none;
-            }
-
-            .hero {
-                padding: 7rem 1.5rem 4rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .contrast-section,
+            .process-section,
+            .examples-section,
             .demo-section,
             .cta-section {
                 padding: 4rem 1.5rem;
             }
 
-            .contrast-card {
-                padding: 2rem;
-            }
-
-            .horizontal-header {
-                padding: 0 1.5rem;
-            }
-
-            .manifesto {
-                padding: 4rem 1.5rem;
-            }
-
-            .cta-card {
-                padding: 2rem;
-            }
+            .manifesto { padding: 4rem 1.5rem; }
         }
     </style>
 </head>
@@ -655,17 +569,17 @@
     <nav>
         <a href="./" class="nav-logo">flowly</a>
         <div class="nav-links">
-            <a href="./services.html">Services</a>
-            <a href="./process.html">Process</a>
+            <a href="./how-it-works.html">How It Works</a>
             <a href="./contact.html" class="nav-cta">Let's Talk</a>
         </div>
     </nav>
 
+    <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
             <h1>Stop doing the work <span class="highlight">AI should do</span></h1>
             <p class="hero-subtitle">
-                I help business owners identify repetitive tasks and build custom AI automations that handle them, so you can focus on what actually grows your business.
+                I help business owners find the tasks eating up their time and build custom AI automations to handle them. You focus on growth. The busywork handles itself.
             </p>
             <div class="hero-actions">
                 <a href="./contact.html" class="btn btn-primary">Book a Free Call</a>
@@ -678,72 +592,64 @@
         </div>
     </section>
 
-    <section class="contrast-section">
-        <div class="contrast-card chaos">
-            <div class="contrast-label">Your day right now</div>
-            <h3>Drowning in busywork</h3>
-            <ul class="task-list crossed">
-                <li><span class="icon">x</span> Manually sorting emails for 30 min</li>
-                <li><span class="icon">x</span> Copy-pasting data between apps</li>
-                <li><span class="icon">x</span> Writing the same follow-up 10x</li>
-                <li><span class="icon">x</span> Generating quotes by hand</li>
-                <li><span class="icon">x</span> Scheduling back-and-forth</li>
-            </ul>
+    <!-- The Process - MAIN OFFER -->
+    <section class="process-section" id="process">
+        <div class="process-header">
+            <h2>How it works</h2>
+            <p>A simple process that starts with your problems and ends with solutions built specifically for your business.</p>
         </div>
-        <div class="contrast-card flow">
-            <div class="contrast-label">Your day with Flowly</div>
-            <h3>Focus on what matters</h3>
-            <ul class="task-list">
-                <li><span class="icon">+</span> AI sorts and drafts responses</li>
-                <li><span class="icon">+</span> Data syncs automatically</li>
-                <li><span class="icon">+</span> Smart follow-ups send themselves</li>
-                <li><span class="icon">+</span> Quotes generated from voice notes</li>
-                <li><span class="icon">+</span> Calendar handles itself</li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="horizontal-section">
-        <div class="horizontal-header">
-            <h2>What I can build for you</h2>
-            <p>Drag or scroll to explore automations</p>
-        </div>
-        <div class="horizontal-wrapper">
-            <div class="horizontal-track" id="serviceTrack">
-                <div class="service-card">
-                    <div class="service-icon">01</div>
-                    <h3>Email Autopilot</h3>
-                    <p>AI reads, sorts, and drafts responses. You just review and send. Works with Gmail, Outlook, or whatever you use.</p>
-                    <span class="service-tag">Most Popular</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">02</div>
-                    <h3>Lead Follow-Up Bot</h3>
-                    <p>Never forget a lead again. Personalized follow-ups that don't sound like robots, because they're trained on your voice.</p>
-                    <span class="service-tag">Sales</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">03</div>
-                    <h3>Voice-to-Quote</h3>
-                    <p>Record a 30-second voice note about a job. Get a professional quote PDF in your inbox. That simple.</p>
-                    <span class="service-tag">Service Businesses</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">04</div>
-                    <h3>App Connector</h3>
-                    <p>Make your tools talk to each other. CRM to invoicing, forms to spreadsheets, calendar to tasks, all automated.</p>
-                    <span class="service-tag">Operations</span>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">05</div>
-                    <h3>Customer Support Bot</h3>
-                    <p>Answer FAQs 24/7 without hiring. Trained on your business, sounds like you, escalates when needed.</p>
-                    <span class="service-tag">Support</span>
-                </div>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h3>Discovery Call</h3>
+                <p>We talk through your day. What takes too long? What's repetitive? What do you wish you could hand off? No prep needed.</p>
+                <span class="process-arrow">></span>
+            </div>
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h3>Diagnosis</h3>
+                <p>I identify exactly where AI can help. Not everything should be automated. I'll tell you what's worth it and what's not.</p>
+                <span class="process-arrow">></span>
+            </div>
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h3>Implementation</h3>
+                <p>I build your custom automation, walk you through it, and hand it over. You own it completely. No subscriptions, no lock-in.</p>
             </div>
         </div>
     </section>
 
+    <!-- What Clients Have Built - Examples, not a menu -->
+    <section class="examples-section">
+        <div class="examples-header">
+            <h2>What clients have built</h2>
+            <p>Every business is different. Here's what past clients needed.</p>
+        </div>
+        <div class="examples-grid">
+            <div class="example-card">
+                <h3>Payroll Automation</h3>
+                <p>Turned a 2-hour weekly task into a 5-minute review. Data pulled automatically, formatted, ready to submit.</p>
+                <span class="example-tag">Operations</span>
+            </div>
+            <div class="example-card">
+                <h3>Email Sorting + Drafts</h3>
+                <p>AI reads incoming emails, sorts by priority, and drafts responses. Owner just reviews and sends.</p>
+                <span class="example-tag">Communication</span>
+            </div>
+            <div class="example-card">
+                <h3>Lead Follow-Up</h3>
+                <p>Automatic follow-ups that sound human, not robotic. Trained on the owner's voice and style.</p>
+                <span class="example-tag">Sales</span>
+            </div>
+            <div class="example-card">
+                <h3>Quote Generator</h3>
+                <p>Voice note in, professional PDF quote out. No more typing up estimates manually.</p>
+                <span class="example-tag">Service Business</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Video -->
     <section class="demo-section" id="demo">
         <div class="demo-glow left"></div>
         <div class="demo-glow right"></div>
@@ -760,42 +666,28 @@
         </div>
     </section>
 
+    <!-- Manifesto -->
     <section class="manifesto">
         <div class="manifesto-inner">
-            <blockquote>"Your time is worth more than copy-paste. Let's automate the boring stuff so you can do the work that actually matters."</blockquote>
+            <blockquote>"Every hour spent on repetitive work is an hour wasted. Let us automate the boring stuff so you can do the work that actually matters."</blockquote>
             <cite>The Flowly Philosophy</cite>
         </div>
     </section>
 
+    <!-- CTA -->
     <section class="cta-section">
         <div class="cta-content">
-            <h2>Ready to reclaim your time?</h2>
-            <p>Let's hop on a quick call. I'll learn about your workflow, identify what's eating your hours, and show you exactly what we can automate. No pressure, no pitch, just clarity.</p>
-            <a href="./process.html" class="btn btn-ghost">See how it works</a>
-        </div>
-        <div class="cta-card">
-            <h3>Geetesh Parelly</h3>
-            <p class="title">Founder, Flowly</p>
-            <a href="tel:737-287-5336" class="contact-link">
-                <span class="icon">tel</span>
-                <span>(737) 287-5336</span>
-            </a>
-            <a href="mailto:geetesh.parelly@2hourlearning.com" class="contact-link">
-                <span class="icon">@</span>
-                <span>geetesh.parelly@2hourlearning.com</span>
-            </a>
-            <a href="https://x.com/GeeteshParelly" target="_blank" class="contact-link">
-                <span class="icon">X</span>
-                <span>@GeeteshParelly</span>
-            </a>
+            <h2>Ready to get your time back?</h2>
+            <p>Book a free discovery call. We'll talk through your workflow, I'll identify what's worth automating, and you'll walk away with clarity, whether we work together or not.</p>
+            <a href="./contact.html" class="btn btn-primary">Book a Free Call</a>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="footer-logo">flowly</div>
         <div class="footer-links">
-            <a href="./services.html">Services</a>
-            <a href="./process.html">Process</a>
+            <a href="./how-it-works.html">How It Works</a>
             <a href="./contact.html">Contact</a>
         </div>
         <p class="footer-copy">2026 Flowly. Built in Austin, TX</p>
@@ -808,21 +700,16 @@
         gsap.from('.hero-subtitle', { y: 30, opacity: 0, duration: 0.8, delay: 0.4, immediateRender: false });
         gsap.from('.hero-actions', { y: 30, opacity: 0, duration: 0.8, delay: 0.6, immediateRender: false });
 
-        gsap.from('.contrast-card.chaos', {
-            x: -60, opacity: 0, rotation: -3, duration: 1, ease: 'power3.out',
+        gsap.from('.process-step', {
+            y: 50, opacity: 0, duration: 0.7, stagger: 0.2, ease: 'power3.out',
             immediateRender: false,
-            scrollTrigger: { trigger: '.contrast-section', start: 'top 75%' }
-        });
-        gsap.from('.contrast-card.flow', {
-            x: 60, opacity: 0, rotation: 3, duration: 1, delay: 0.2, ease: 'power3.out',
-            immediateRender: false,
-            scrollTrigger: { trigger: '.contrast-section', start: 'top 75%' }
+            scrollTrigger: { trigger: '.process-section', start: 'top 75%' }
         });
 
-        gsap.from('.service-card', {
-            y: 60, opacity: 0, rotation: 2, duration: 0.8, stagger: 0.15, ease: 'power3.out',
+        gsap.from('.example-card', {
+            y: 40, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out',
             immediateRender: false,
-            scrollTrigger: { trigger: '.horizontal-section', start: 'top 70%' }
+            scrollTrigger: { trigger: '.examples-section', start: 'top 75%' }
         });
 
         gsap.from('.demo-video-wrapper', {
@@ -835,27 +722,6 @@
             y: 40, opacity: 0, duration: 1, ease: 'power3.out',
             immediateRender: false,
             scrollTrigger: { trigger: '.manifesto', start: 'top 80%' }
-        });
-
-        const track = document.getElementById('serviceTrack');
-        let isDragging = false;
-        let startX, scrollLeft;
-
-        track.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            track.style.cursor = 'grabbing';
-            startX = e.pageX - track.offsetLeft;
-            scrollLeft = track.parentElement.scrollLeft;
-        });
-
-        track.addEventListener('mouseleave', () => { isDragging = false; track.style.cursor = 'grab'; });
-        track.addEventListener('mouseup', () => { isDragging = false; track.style.cursor = 'grab'; });
-        track.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            const x = e.pageX - track.offsetLeft;
-            const walk = (x - startX) * 2;
-            track.parentElement.scrollLeft = scrollLeft - walk;
         });
 
         document.addEventListener('mousemove', (e) => {

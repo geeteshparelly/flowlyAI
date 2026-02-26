@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Process | Flowly AI Automation</title>
-    <meta name="description" content="How Flowly works: Discovery call, diagnosis, build, and handoff. Simple process, custom results.">
+    <title>How It Works | Flowly AI Automation</title>
+    <meta name="description" content="How Flowly works: Discovery call, diagnosis, implementation. Simple process, custom results.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -12,7 +12,6 @@
     <style>
         :root {
             --bg: #e8f4fc;
-            --bg-alt: #dceef8;
             --surface: #ffffff;
             --text-dark: #2a3441;
             --text-body: #4a5568;
@@ -96,7 +95,7 @@
 
         .page-header {
             padding: 10rem 3rem 4rem;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             text-align: center;
         }
@@ -111,126 +110,92 @@
         .page-header p {
             font-size: 1.25rem;
             color: var(--text-body);
-            max-width: 600px;
+        }
+
+        /* Detailed Process */
+        .process-detailed {
+            padding: 4rem 3rem 6rem;
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        .timeline-section {
-            padding: 4rem 3rem 8rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .timeline {
-            position: relative;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(to bottom, var(--accent-light), var(--accent), var(--accent-light));
-            border-radius: 3px;
-        }
-
-        .timeline-item {
+        .process-item {
             display: grid;
-            grid-template-columns: 1fr 80px 1fr;
+            grid-template-columns: 100px 1fr;
             gap: 2rem;
-            align-items: center;
             margin-bottom: 4rem;
+            align-items: start;
         }
 
-        .timeline-item:last-child { margin-bottom: 0; }
-
-        .timeline-content {
-            background: var(--surface);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            transition: all 0.3s;
+        .process-item:last-child {
+            margin-bottom: 0;
         }
 
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(90, 139, 184, 0.15);
-            border-color: var(--accent);
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content {
-            grid-column: 1;
-            text-align: right;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content {
-            grid-column: 3;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-illustration {
-            grid-column: 3;
-        }
-
-        .timeline-item:nth-child(even) .timeline-illustration {
-            grid-column: 1;
-            grid-row: 1;
-        }
-
-        .timeline-node {
-            grid-column: 2;
+        .process-number {
             width: 80px;
             height: 80px;
-            background: var(--surface);
-            border: 3px solid var(--accent);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Syne', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--accent);
-            position: relative;
-            z-index: 1;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--surface);
         }
 
-        .timeline-content h3 {
+        .process-content {
+            padding-top: 0.5rem;
+        }
+
+        .process-content h3 {
             font-size: 1.5rem;
             margin-bottom: 0.75rem;
         }
 
-        .timeline-content p {
+        .process-content p {
             color: var(--text-body);
             margin-bottom: 1rem;
+            font-size: 1.05rem;
         }
 
-        .timeline-detail {
+        .process-details {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .process-details h4 {
             font-size: 0.9rem;
             color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .process-details ul {
+            list-style: none;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 0.5rem;
         }
 
-        .timeline-item:nth-child(odd) .timeline-detail {
-            justify-content: flex-end;
-        }
-
-        .timeline-illustration {
-            height: 180px;
-            background: var(--accent-light);
-            border-radius: 16px;
+        .process-details li {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent-dark);
+            gap: 0.5rem;
+            font-size: 0.95rem;
         }
 
+        .process-details li::before {
+            content: '+';
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* FAQ */
         .faq-section {
             padding: 4rem 3rem 6rem;
             background: var(--surface);
@@ -245,10 +210,6 @@
         .faq-header h2 {
             font-size: 2rem;
             margin-bottom: 0.5rem;
-        }
-
-        .faq-header p {
-            color: var(--text-muted);
         }
 
         .faq-list {
@@ -313,6 +274,7 @@
             max-height: 500px;
         }
 
+        /* CTA */
         .page-cta {
             padding: 6rem 3rem;
             text-align: center;
@@ -388,49 +350,26 @@
             font-size: 0.85rem;
         }
 
-        @media (max-width: 900px) {
-            .timeline::before {
-                left: 40px;
-            }
-
-            .timeline-item {
-                grid-template-columns: 80px 1fr;
-                gap: 1.5rem;
-            }
-
-            .timeline-node {
-                grid-column: 1;
-                width: 60px;
-                height: 60px;
-                font-size: 1.2rem;
-            }
-
-            .timeline-item:nth-child(odd) .timeline-content,
-            .timeline-item:nth-child(even) .timeline-content {
-                grid-column: 2;
-                text-align: left;
-            }
-
-            .timeline-item:nth-child(odd) .timeline-detail {
-                justify-content: flex-start;
-            }
-
-            .timeline-illustration {
-                display: none;
-            }
-        }
-
         @media (max-width: 768px) {
             nav { padding: 1rem 1.5rem; }
             .nav-links { gap: 1.5rem; }
             .nav-links a:not(.nav-cta) { display: none; }
 
             .page-header { padding: 8rem 1.5rem 3rem; }
-            .timeline-section { padding: 2rem 1.5rem 5rem; }
+            .process-detailed { padding: 2rem 1.5rem 4rem; }
             .faq-section { padding: 3rem 1.5rem 4rem; }
             .page-cta { padding: 4rem 1.5rem; }
 
-            .timeline-content { padding: 1.5rem; }
+            .process-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .process-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -438,8 +377,7 @@
     <nav>
         <a href="./" class="nav-logo">flowly</a>
         <div class="nav-links">
-            <a href="./services.html">Services</a>
-            <a href="./process.html" class="active">Process</a>
+            <a href="./how-it-works.html" class="active">How It Works</a>
             <a href="./contact.html" class="nav-cta">Let's Talk</a>
         </div>
     </nav>
@@ -449,61 +387,86 @@
         <p>No endless meetings, no scope creep. We figure out what you need, I build it, you own it.</p>
     </header>
 
-    <section class="timeline-section">
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>Discovery Call</h3>
-                    <p>We hop on a 30-minute call. You walk me through your day: what takes too long, what's repetitive, what drives you crazy. No prep needed.</p>
-                    <span class="timeline-detail">30 minutes / Free</span>
+    <section class="process-detailed">
+        <div class="process-item">
+            <div class="process-number">1</div>
+            <div class="process-content">
+                <h3>Discovery Call</h3>
+                <p>We hop on a 30-minute call. You walk me through your typical day, your frustrations, and where you feel like you're wasting time. No prep needed, just a conversation.</p>
+                <div class="process-details">
+                    <h4>What we cover</h4>
+                    <ul>
+                        <li>Your daily workflow and pain points</li>
+                        <li>Tasks that feel repetitive or tedious</li>
+                        <li>Tools you already use</li>
+                        <li>What success looks like for you</li>
+                    </ul>
                 </div>
-                <div class="timeline-node">1</div>
-                <div class="timeline-illustration">Call</div>
             </div>
+        </div>
 
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>Diagnosis</h3>
-                    <p>I analyze your workflow and identify exactly where AI can help. Not everything should be automated. I'll tell you what's worth it and what's not.</p>
-                    <span class="timeline-detail">Custom roadmap delivered</span>
+        <div class="process-item">
+            <div class="process-number">2</div>
+            <div class="process-content">
+                <h3>Diagnosis</h3>
+                <p>I take what I learned and identify exactly where AI can help. Not everything should be automated, and I'll be honest about what's worth it and what's not. You get a clear roadmap.</p>
+                <div class="process-details">
+                    <h4>What you get</h4>
+                    <ul>
+                        <li>Specific tasks identified for automation</li>
+                        <li>Honest assessment of what AI can/can't do</li>
+                        <li>Estimated time savings</li>
+                        <li>Fixed price quote, no surprises</li>
+                    </ul>
                 </div>
-                <div class="timeline-node">2</div>
-                <div class="timeline-illustration">Plan</div>
             </div>
+        </div>
 
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>Build</h3>
-                    <p>I build your custom automation. You'll see progress along the way, no disappearing for 3 months. Most projects take 1-2 weeks.</p>
-                    <span class="timeline-detail">1-2 weeks typical</span>
+        <div class="process-item">
+            <div class="process-number">3</div>
+            <div class="process-content">
+                <h3>Implementation</h3>
+                <p>I build your custom automation. You'll see progress along the way, not just a final delivery after weeks of silence. Most projects take 1-2 weeks depending on complexity.</p>
+                <div class="process-details">
+                    <h4>How it works</h4>
+                    <ul>
+                        <li>Regular updates on progress</li>
+                        <li>You test as we go</li>
+                        <li>Adjustments based on your feedback</li>
+                        <li>Full walkthrough when complete</li>
+                    </ul>
                 </div>
-                <div class="timeline-node">3</div>
-                <div class="timeline-illustration">Build</div>
             </div>
+        </div>
 
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <h3>Teach and Handoff</h3>
-                    <p>I don't just hand you a black box. I walk you through how it works, record tutorials, and make sure you can manage it yourself. You own it completely.</p>
-                    <span class="timeline-detail">Full documentation included</span>
+        <div class="process-item">
+            <div class="process-number">4</div>
+            <div class="process-content">
+                <h3>Handoff</h3>
+                <p>You get everything: the automation, documentation, and a walkthrough so you understand how it works. You own it completely. No subscriptions, no lock-in, no dependency on me.</p>
+                <div class="process-details">
+                    <h4>What's included</h4>
+                    <ul>
+                        <li>Full ownership of everything built</li>
+                        <li>Documentation and tutorials</li>
+                        <li>30 days of support</li>
+                        <li>No recurring fees</li>
+                    </ul>
                 </div>
-                <div class="timeline-node">4</div>
-                <div class="timeline-illustration">Done</div>
             </div>
         </div>
     </section>
 
     <section class="faq-section">
         <div class="faq-header">
-            <h2>Questions people ask</h2>
-            <p>Quick answers to the common ones</p>
+            <h2>Questions</h2>
         </div>
         <div class="faq-list">
             <div class="faq-item">
                 <button class="faq-question">How much does this cost?</button>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        It depends on complexity. Simple automations (email sorting, basic follow-ups) start around $500. More complex builds (multi-step workflows, custom integrations) range $1,000-$3,000. I'll give you a fixed quote after the discovery call, no surprises.
+                        It depends on complexity. Simple automations start around $200. More complex builds with multiple integrations range higher. I'll give you a fixed quote after the discovery call, no surprises.
                     </div>
                 </div>
             </div>
@@ -532,10 +495,10 @@
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">How is this different from Zapier?</button>
+                <button class="faq-question">How long does it take?</button>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">
-                        Zapier connects apps. I build intelligence. The difference is AI: your automation can read context, make decisions, draft content in your voice. It's not just "if this then that." It's "understand this, then do the smart thing."
+                        Most projects are done in 1-2 weeks. Simple automations can be faster. I'll give you a timeline estimate after the discovery call based on what we're building.
                     </div>
                 </div>
             </div>
@@ -552,7 +515,6 @@
         <div class="footer-logo">flowly</div>
         <div class="footer-links">
             <a href="./">Home</a>
-            <a href="./services.html">Services</a>
             <a href="./contact.html">Contact</a>
         </div>
         <p class="footer-copy">2026 Flowly. Built in Austin, TX</p>
@@ -564,25 +526,12 @@
         gsap.from('.page-header h1', { y: 40, opacity: 0, duration: 0.8, immediateRender: false });
         gsap.from('.page-header p', { y: 30, opacity: 0, duration: 0.8, delay: 0.2, immediateRender: false });
 
-        document.querySelectorAll('.timeline-item').forEach((item, i) => {
-            const direction = i % 2 === 0 ? -60 : 60;
-            gsap.from(item.querySelector('.timeline-content'), {
-                x: direction, opacity: 0, duration: 0.8, ease: 'power3.out',
+        document.querySelectorAll('.process-item').forEach((item, i) => {
+            gsap.from(item, {
+                x: -40, opacity: 0, duration: 0.7, delay: i * 0.15, ease: 'power3.out',
                 immediateRender: false,
-                scrollTrigger: { trigger: item, start: 'top 80%' }
+                scrollTrigger: { trigger: item, start: 'top 85%' }
             });
-            gsap.from(item.querySelector('.timeline-node'), {
-                scale: 0, opacity: 0, duration: 0.5, delay: 0.2, ease: 'back.out(1.7)',
-                immediateRender: false,
-                scrollTrigger: { trigger: item, start: 'top 80%' }
-            });
-            if (item.querySelector('.timeline-illustration')) {
-                gsap.from(item.querySelector('.timeline-illustration'), {
-                    x: -direction, opacity: 0, duration: 0.8, delay: 0.1, ease: 'power3.out',
-                    immediateRender: false,
-                    scrollTrigger: { trigger: item, start: 'top 80%' }
-                });
-            }
         });
 
         gsap.from('.faq-item', {

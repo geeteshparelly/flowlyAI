@@ -206,18 +206,21 @@
             font-size: 0.85rem;
         }
 
+        .scroll-prompt .arrow-wrap {
+            animation: bounce 2s infinite;
+        }
+
         .scroll-prompt .arrow {
             width: 24px;
             height: 24px;
             border-right: 2px solid var(--text-muted);
             border-bottom: 2px solid var(--text-muted);
             transform: rotate(45deg);
-            animation: bounce 2s infinite;
         }
 
         @keyframes bounce {
-            0%, 100% { transform: rotate(45deg) translateY(0); }
-            50% { transform: rotate(45deg) translateY(8px); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
         }
 
         /* Process Section - Timeline Style */
@@ -624,7 +627,7 @@
         </div>
         <div class="scroll-prompt">
             <span>Scroll to explore</span>
-            <div class="arrow"></div>
+            <div class="arrow-wrap"><div class="arrow"></div></div>
         </div>
     </section>
 

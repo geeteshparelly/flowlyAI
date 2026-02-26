@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowly | AI Automation for Business Owners</title>
+    <meta name="description" content="Stop doing busywork. Flowly helps business owners implement AI automations that save hours every week.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #e8f4fc;
+            --surface: #ffffff;
+            --text-dark: #2a3441;
+            --text-body: #4a5568;
+            --text-muted: #7b8fa3;
+            --accent: #5a8bb8;
+            --accent-dark: #4a7ba8;
+            --accent-light: #d4e8f7;
+            --border: #cde4f4;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text-body);
+            line-height: 1.6;
+        }
+
+        /* Grain overlay */
+        body::after {
+            content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(90, 139, 184, 0.15);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-body);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-cta {
+            background: var(--accent) !important;
+            color: white !important;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+        }
+        
+        .nav-cta:hover {
+            background: var(--accent-dark) !important;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 9rem 2rem 5rem;
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent-dark);
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-logo {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-tagline {
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-body);
+            margin-bottom: 2.5rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text-dark);
+            border: 2px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Section styling */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        /* Demo Section */
+        .demo-section {
+            padding: 4rem 2rem;
+            background: var(--surface);
+        }
+
+        .demo-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .demo-video {
+            position: relative;
+            padding-bottom: 56.25%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(90, 139, 184, 0.2);
+            border: 1px solid var(--border);
+        }
+
+        .demo-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .demo-caption {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Coming Soon Section */
+        .coming-soon {
+            padding: 4rem 2rem;
+        }
+
+        .coming-soon-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .coming-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coming-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+        }
+
+        .coming-badge {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .coming-card h3 {
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .coming-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .coming-shimmer {
+            height: 120px;
+            background: linear-gradient(110deg, var(--bg) 0%, var(--border) 40%, var(--bg) 60%, var(--border) 100%);
+            background-size: 300% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 4rem 2rem;
+            background: var(--surface);
+        }
+        
+        .steps {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 2.5rem;
+        }
+        
+        .step {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            width: 56px;
+            height: 56px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-content p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Who It's For */
+        .who-section {
+            padding: 4rem 2rem;
+        }
+
+        .who-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .who-item {
+            background: var(--surface);
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .who-icon {
+            font-size: 1.5rem;
+        }
+
+        .who-item span {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 4rem 2rem;
+            background: var(--surface);
+            text-align: center;
+        }
+        
+        .contact-card {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+        }
+        
+        .contact-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+        
+        .contact-title {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .contact-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .contact-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero {
+                padding: 7rem 1.5rem 3rem;
+            }
+            
+            .hero-logo {
+                font-size: 2.5rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1.15rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+            
+            .demo-section, .coming-soon, .how-it-works, .who-section, .contact {
+                padding: 3rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-links a:not(.nav-cta) {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="./" class="nav-logo">flowly</a>
+        <div class="nav-links">
+            <a href="#demo">Demo</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#contact" class="nav-cta">Let's Talk</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <span class="hero-badge">🤖 AI Automation</span>
+        <div class="hero-logo">flowly</div>
+        <p class="hero-tagline">AI automation for business owners</p>
+        <p class="hero-description">
+            Stop doing busywork. I help entrepreneurs implement AI automations 
+            that save hours every week — so you can focus on growing your business.
+        </p>
+        <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary">Book a Free Call →</a>
+            <a href="#demo" class="btn btn-secondary">Watch Demo</a>
+        </div>
+    </section>
+
+    <section class="demo-section" id="demo">
+        <div class="demo-container">
+            <h2 class="section-title">See It In Action</h2>
+            <p class="section-subtitle">Real automation, real time savings</p>
+            
+            <div class="demo-video">
+                <iframe src="https://www.loom.com/embed/b059eb8c640945e7a12797c826fd6554" allowfullscreen></iframe>
+            </div>
+            <p class="demo-caption">A walkthrough of an AI automation built for a real client</p>
+        </div>
+    </section>
+
+    <section class="coming-soon">
+        <h2 class="section-title">More Automations Coming</h2>
+        <p class="section-subtitle">Custom-built solutions based on what your business actually needs</p>
+        
+        <div class="coming-soon-grid">
+            <div class="coming-card">
+                <span class="coming-badge">Coming Soon</span>
+                <h3>Smart Email Sorting</h3>
+                <p>AI reads your inbox and drafts responses, flags urgent items, and archives the noise.</p>
+                <div class="coming-shimmer">Demo in progress...</div>
+            </div>
+            
+            <div class="coming-card">
+                <span class="coming-badge">Coming Soon</span>
+                <h3>Lead Follow-Up Bot</h3>
+                <p>Automatically follow up with leads who haven't responded. Personalized, not spammy.</p>
+                <div class="coming-shimmer">Demo in progress...</div>
+            </div>
+            
+            <div class="coming-card">
+                <span class="coming-badge">Coming Soon</span>
+                <h3>Invoice & Quote Generator</h3>
+                <p>Generate professional quotes and invoices from a quick voice note or text message.</p>
+                <div class="coming-shimmer">Demo in progress...</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">Simple process, custom results</p>
+        
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Discovery Call</h3>
+                    <p>We hop on a quick call to understand your workflow and identify the pain points that eat up your time.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Diagnose & Design</h3>
+                    <p>I figure out exactly where AI can automate tasks and make your work more efficient. No fluff — just practical solutions.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Build & Teach</h3>
+                    <p>I create the automation tailored to your needs, then walk you through how to use it. You'll own it completely.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="who-section">
+        <h2 class="section-title">Built For</h2>
+        <p class="section-subtitle">Business owners who'd rather work on their business, not in it</p>
+        
+        <div class="who-grid">
+            <div class="who-item">
+                <span class="who-icon">🏪</span>
+                <span>Small Business Owners</span>
+            </div>
+            <div class="who-item">
+                <span class="who-icon">🚀</span>
+                <span>Solo Entrepreneurs</span>
+            </div>
+            <div class="who-item">
+                <span class="who-icon">🏠</span>
+                <span>Service Providers</span>
+            </div>
+            <div class="who-item">
+                <span class="who-icon">📈</span>
+                <span>Growing Agencies</span>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact" id="contact">
+        <h2 class="section-title">Let's Talk</h2>
+        <p class="section-subtitle">Book a free discovery call — no commitment, just a conversation</p>
+        
+        <div class="contact-card">
+            <div class="contact-name">Geetesh Parelly</div>
+            <p class="contact-title">Founder, Flowly</p>
+            <div class="contact-links">
+                <a href="tel:737-287-5336">📞 (737) 287-5336</a>
+                <a href="mailto:geetesh.parelly@2hourlearning.com">✉️ geetesh.parelly@2hourlearning.com</a>
+                <a href="https://x.com/GeeteshParelly" target="_blank">𝕏 @GeeteshParelly</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2026 Flowly · Built in Austin, TX</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Flowly AI Automation</title>
+    <meta name="description" content="Book a free discovery call with Flowly. Let's talk about automating your business.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        :root {
+            --bg: #e8f4fc;
+            --bg-alt: #dceef8;
+            --surface: #ffffff;
+            --text-dark: #2a3441;
+            --text-body: #4a5568;
+            --text-muted: #7b8fa3;
+            --accent: #5a8bb8;
+            --accent-dark: #4a7ba8;
+            --accent-light: #d4e8f7;
+            --border: #cde4f4;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        body::after {
+            content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        h1, h2, h3, h4 { font-family: 'Syne', sans-serif; color: var(--text-dark); }
+        a { color: inherit; text-decoration: none; }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.25rem 3rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(232, 244, 252, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .nav-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            color: var(--text-body);
+        }
+        
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a.active { color: var(--accent); }
+        
+        .nav-cta {
+            background: var(--text-dark);
+            color: var(--surface) !important;
+            padding: 0.65rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .nav-cta:hover { 
+            background: var(--accent-dark); 
+            transform: translateY(-2px);
+        }
+
+        /* Main Split Layout */
+        .contact-split {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding-top: 80px;
+        }
+
+        .contact-left {
+            padding: 6rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-left h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-left h1 span {
+            display: block;
+            color: var(--accent);
+        }
+
+        .contact-left p {
+            font-size: 1.2rem;
+            color: var(--text-body);
+            max-width: 450px;
+            margin-bottom: 3rem;
+        }
+
+        .availability {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            width: fit-content;
+        }
+
+        .availability-dot {
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+        }
+
+        .availability-text {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .availability-text span {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .contact-right {
+            background: var(--surface);
+            padding: 6rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-left: 1px solid var(--border);
+        }
+
+        .contact-card {
+            max-width: 450px;
+        }
+
+        .contact-card h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            padding: 1.25rem 1.5rem;
+            background: var(--bg);
+            border-radius: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .contact-method:hover {
+            background: var(--accent-light);
+            border-color: var(--accent);
+            transform: translateX(8px);
+        }
+
+        .contact-method-icon {
+            width: 52px;
+            height: 52px;
+            background: var(--surface);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(90, 139, 184, 0.1);
+        }
+
+        .contact-method-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .contact-method-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--surface);
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        /* Calendar placeholder */
+        .calendar-section {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .calendar-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-placeholder {
+            background: linear-gradient(135deg, var(--bg) 0%, var(--accent-light) 100%);
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            border: 2px dashed var(--border);
+        }
+
+        .calendar-placeholder p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--text-dark);
+            color: var(--surface);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 3rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer-copy a {
+            color: var(--accent);
+        }
+
+        /* Mobile */
+        @media (max-width: 1024px) {
+            .contact-split {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-left {
+                padding: 8rem 2rem 3rem;
+            }
+
+            .contact-right {
+                padding: 3rem 2rem;
+                border-left: none;
+                border-top: 1px solid var(--border);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { gap: 1.5rem; }
+            .nav-links a:not(.nav-cta) { display: none; }
+
+            .contact-left h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-left p {
+                font-size: 1.05rem;
+            }
+
+            .contact-method {
+                padding: 1rem;
+            }
+
+            .contact-method-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="./" class="nav-logo">flowly</a>
+        <div class="nav-links">
+            <a href="./services.html">Services</a>
+            <a href="./process.html">Process</a>
+            <a href="./contact.html" class="nav-cta active">Let's Talk</a>
+        </div>
+    </nav>
+
+    <main class="contact-split">
+        <div class="contact-left">
+            <h1>Let's build <span>something</span></h1>
+            <p>Book a free discovery call. No pitch, no pressure — just a conversation about what's eating your time and whether automation can help.</p>
+            <div class="availability">
+                <div class="availability-dot"></div>
+                <div class="availability-text">
+                    Available for new projects <span>· Responding within 24h</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-right">
+            <div class="contact-card">
+                <h2>Geetesh Parelly</h2>
+                <p class="subtitle">Founder, Flowly · Austin, TX</p>
+
+                <div class="contact-methods">
+                    <a href="tel:737-287-5336" class="contact-method">
+                        <div class="contact-method-icon">📞</div>
+                        <div class="contact-method-info">
+                            <h4>(737) 287-5336</h4>
+                            <p>Call or text anytime</p>
+                        </div>
+                    </a>
+                    <a href="mailto:geetesh.parelly@2hourlearning.com" class="contact-method">
+                        <div class="contact-method-icon">✉️</div>
+                        <div class="contact-method-info">
+                            <h4>geetesh.parelly@2hourlearning.com</h4>
+                            <p>Email for detailed inquiries</p>
+                        </div>
+                    </a>
+                    <a href="https://x.com/GeeteshParelly" target="_blank" class="contact-method">
+                        <div class="contact-method-icon">𝕏</div>
+                        <div class="contact-method-info">
+                            <h4>@GeeteshParelly</h4>
+                            <p>DMs open</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://x.com/GeeteshParelly" target="_blank" class="social-link" title="X / Twitter">𝕏</a>
+                    <a href="mailto:geetesh.parelly@2hourlearning.com" class="social-link" title="Email">✉️</a>
+                    <a href="tel:737-287-5336" class="social-link" title="Phone">📞</a>
+                </div>
+
+                <div class="calendar-section">
+                    <h3>Or schedule directly</h3>
+                    <div class="calendar-placeholder">
+                        <p>📅 Calendar booking coming soon</p>
+                        <a href="tel:737-287-5336" class="btn btn-primary">Call me instead →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p class="footer-copy">© 2026 <a href="./">Flowly</a> · Built in Austin, TX</p>
+    </footer>
+
+    <script>
+        // Animations
+        gsap.from('.contact-left h1', { x: -50, opacity: 0, duration: 0.8, delay: 0.2, immediateRender: false });
+        gsap.from('.contact-left p', { x: -40, opacity: 0, duration: 0.8, delay: 0.4, immediateRender: false });
+        gsap.from('.availability', { y: 20, opacity: 0, duration: 0.6, delay: 0.6, immediateRender: false });
+
+        gsap.from('.contact-card h2', { y: 30, opacity: 0, duration: 0.7, delay: 0.3, immediateRender: false });
+        gsap.from('.contact-card .subtitle', { y: 20, opacity: 0, duration: 0.6, delay: 0.4, immediateRender: false });
+        gsap.from('.contact-method', { x: 40, opacity: 0, duration: 0.6, stagger: 0.1, delay: 0.5, immediateRender: false });
+        gsap.from('.social-link', { scale: 0, opacity: 0, duration: 0.4, stagger: 0.1, delay: 0.8, ease: 'back.out(1.7)', immediateRender: false });
+        gsap.from('.calendar-section', { y: 30, opacity: 0, duration: 0.7, delay: 1, immediateRender: false });
+    </script>
+</body>
+</html>

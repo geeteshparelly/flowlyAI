@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process | Flowly AI Automation</title>
+    <meta name="description" content="How Flowly works: Discovery call, diagnosis, build, and handoff. Simple process, custom results.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --bg: #e8f4fc;
+            --bg-alt: #dceef8;
+            --surface: #ffffff;
+            --text-dark: #2a3441;
+            --text-body: #4a5568;
+            --text-muted: #7b8fa3;
+            --accent: #5a8bb8;
+            --accent-dark: #4a7ba8;
+            --accent-light: #d4e8f7;
+            --border: #cde4f4;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::after {
+            content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        h1, h2, h3, h4 { font-family: 'Syne', sans-serif; color: var(--text-dark); }
+        a { color: inherit; text-decoration: none; }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.25rem 3rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(232, 244, 252, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .nav-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            color: var(--text-body);
+        }
+        
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a.active { color: var(--accent); }
+        
+        .nav-cta {
+            background: var(--text-dark);
+            color: var(--surface) !important;
+            padding: 0.65rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .nav-cta:hover { 
+            background: var(--accent-dark); 
+            transform: translateY(-2px);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 10rem 3rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.25rem;
+            color: var(--text-body);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Timeline */
+        .timeline-section {
+            padding: 4rem 3rem 8rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--accent-light), var(--accent), var(--accent-light));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .timeline-item:last-child { margin-bottom: 0; }
+
+        .timeline-content {
+            background: var(--surface);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(90, 139, 184, 0.15);
+            border-color: var(--accent);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            grid-column: 1;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            grid-column: 3;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-illustration {
+            grid-column: 3;
+        }
+
+        .timeline-item:nth-child(even) .timeline-illustration {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .timeline-node {
+            grid-column: 2;
+            width: 80px;
+            height: 80px;
+            background: var(--surface);
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-content p {
+            color: var(--text-body);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-detail {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-detail {
+            justify-content: flex-end;
+        }
+
+        .timeline-illustration {
+            height: 180px;
+            background: var(--accent-light);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 3rem 6rem;
+            background: var(--surface);
+        }
+
+        .faq-header {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        .faq-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .faq-header p {
+            color: var(--text-muted);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .faq-item {
+            background: var(--bg);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: none;
+            border: none;
+            text-align: left;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: var(--accent-light);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--accent);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .faq-answer-inner {
+            padding: 0 2rem 1.5rem;
+            color: var(--text-body);
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+        }
+
+        /* CTA */
+        .page-cta {
+            padding: 6rem 3rem;
+            text-align: center;
+        }
+
+        .page-cta h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        .page-cta p {
+            color: var(--text-body);
+            font-size: 1.15rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--text-dark);
+            color: var(--surface);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(90, 139, 184, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            .timeline::before {
+                left: 40px;
+            }
+
+            .timeline-item {
+                grid-template-columns: 80px 1fr;
+                gap: 1.5rem;
+            }
+
+            .timeline-node {
+                grid-column: 1;
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                grid-column: 2;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-detail {
+                justify-content: flex-start;
+            }
+
+            .timeline-illustration {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { gap: 1.5rem; }
+            .nav-links a:not(.nav-cta) { display: none; }
+
+            .page-header { padding: 8rem 1.5rem 3rem; }
+            .timeline-section { padding: 2rem 1.5rem 5rem; }
+            .faq-section { padding: 3rem 1.5rem 4rem; }
+            .page-cta { padding: 4rem 1.5rem; }
+
+            .timeline-content { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="./" class="nav-logo">flowly</a>
+        <div class="nav-links">
+            <a href="./services.html">Services</a>
+            <a href="./process.html" class="active">Process</a>
+            <a href="./contact.html" class="nav-cta">Let's Talk</a>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>Simple process, custom results</h1>
+        <p>No endless meetings, no scope creep. We figure out what you need, I build it, you own it.</p>
+    </header>
+
+    <section class="timeline-section">
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Discovery Call</h3>
+                    <p>We hop on a 30-minute call. You walk me through your day — what takes too long, what's repetitive, what drives you crazy. No prep needed.</p>
+                    <span class="timeline-detail">⏱️ 30 minutes · Free</span>
+                </div>
+                <div class="timeline-node">1</div>
+                <div class="timeline-illustration">🎯</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Diagnosis</h3>
+                    <p>I analyze your workflow and identify exactly where AI can help. Not everything should be automated — I'll tell you what's worth it and what's not.</p>
+                    <span class="timeline-detail">📋 Custom roadmap delivered</span>
+                </div>
+                <div class="timeline-node">2</div>
+                <div class="timeline-illustration">🔍</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Build</h3>
+                    <p>I build your custom automation. You'll see progress along the way — no disappearing for 3 months. Most projects take 1-2 weeks.</p>
+                    <span class="timeline-detail">🛠️ 1-2 weeks typical</span>
+                </div>
+                <div class="timeline-node">3</div>
+                <div class="timeline-illustration">⚙️</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Teach & Handoff</h3>
+                    <p>I don't just hand you a black box. I walk you through how it works, record tutorials, and make sure you can manage it yourself. You own it completely.</p>
+                    <span class="timeline-detail">🎓 Full documentation included</span>
+                </div>
+                <div class="timeline-node">4</div>
+                <div class="timeline-illustration">🚀</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="faq-header">
+            <h2>Questions people ask</h2>
+            <p>Quick answers to the common ones</p>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question">How much does this cost?</button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        It depends on complexity. Simple automations (email sorting, basic follow-ups) start around $500. More complex builds (multi-step workflows, custom integrations) range $1,000-$3,000. I'll give you a fixed quote after the discovery call — no surprises.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">What if the automation breaks?</button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        I build things to last, but tech happens. You get 30 days of support after handoff. If something breaks in that window, I fix it free. After that, I'm still here — just reach out and we'll sort it out.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Do I need to be technical?</button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Nope. If you can use email and click buttons, you can use what I build. I design automations for business owners, not developers. The whole point is making your life easier, not adding another thing to learn.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">What tools do you work with?</button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Most common: Gmail, Outlook, Google Sheets, Notion, Slack, various CRMs (HubSpot, Pipedrive, etc.), Stripe, QuickBooks, Calendly. If you use something else, ask — I probably can connect it or figure it out.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">How is this different from Zapier?</button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Zapier connects apps. I build intelligence. The difference is AI — your automation can read context, make decisions, draft content in your voice. It's not just "if this then that." It's "understand this, then do the smart thing."
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-cta">
+        <h2>Ready to get started?</h2>
+        <p>Book a free discovery call. Worst case, you walk away with clarity on what's possible.</p>
+        <a href="./contact.html" class="btn btn-primary">Book your call →</a>
+    </section>
+
+    <footer>
+        <div class="footer-logo">flowly</div>
+        <div class="footer-links">
+            <a href="./">Home</a>
+            <a href="./services.html">Services</a>
+            <a href="./contact.html">Contact</a>
+        </div>
+        <p class="footer-copy">© 2026 Flowly · Built in Austin, TX</p>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.from('.page-header h1', { y: 40, opacity: 0, duration: 0.8, immediateRender: false });
+        gsap.from('.page-header p', { y: 30, opacity: 0, duration: 0.8, delay: 0.2, immediateRender: false });
+
+        document.querySelectorAll('.timeline-item').forEach((item, i) => {
+            const direction = i % 2 === 0 ? -60 : 60;
+            gsap.from(item.querySelector('.timeline-content'), {
+                x: direction, opacity: 0, duration: 0.8, ease: 'power3.out',
+                immediateRender: false,
+                scrollTrigger: { trigger: item, start: 'top 80%' }
+            });
+            gsap.from(item.querySelector('.timeline-node'), {
+                scale: 0, opacity: 0, duration: 0.5, delay: 0.2, ease: 'back.out(1.7)',
+                immediateRender: false,
+                scrollTrigger: { trigger: item, start: 'top 80%' }
+            });
+            if (item.querySelector('.timeline-illustration')) {
+                gsap.from(item.querySelector('.timeline-illustration'), {
+                    x: -direction, opacity: 0, duration: 0.8, delay: 0.1, ease: 'power3.out',
+                    immediateRender: false,
+                    scrollTrigger: { trigger: item, start: 'top 80%' }
+                });
+            }
+        });
+
+        gsap.from('.faq-item', {
+            y: 30, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'power3.out',
+            immediateRender: false,
+            scrollTrigger: { trigger: '.faq-section', start: 'top 75%' }
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+    </script>
+</body>
+</html>

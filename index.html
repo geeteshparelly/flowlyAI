@@ -6,10 +6,13 @@
     <title>Flowly | AI Automation for Business Owners</title>
     <meta name="description" content="Stop doing busywork. Flowly helps business owners implement AI automations that save hours every week.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
         :root {
             --bg: #e8f4fc;
+            --bg-alt: #dceef8;
             --surface: #ffffff;
             --text-dark: #2a3441;
             --text-body: #4a5568;
@@ -18,187 +21,448 @@
             --accent-dark: #4a7ba8;
             --accent-light: #d4e8f7;
             --border: #cde4f4;
+            --glow: rgba(90, 139, 184, 0.4);
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         
         body {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'DM Sans', sans-serif;
             background: var(--bg);
             color: var(--text-body);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Grain overlay */
         body::after {
-            content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.02;
+            content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.025;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         }
-        
+
+        h1, h2, h3, h4 { font-family: 'Syne', sans-serif; color: var(--text-dark); }
+        a { color: inherit; text-decoration: none; }
+
+        /* Floating blobs */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .blob-1 { width: 400px; height: 400px; background: var(--accent-light); top: -100px; right: -100px; }
+        .blob-2 { width: 300px; height: 300px; background: var(--accent); opacity: 0.2; bottom: 20%; left: -100px; }
+        .blob-3 { width: 250px; height: 250px; background: var(--accent-light); top: 40%; right: 10%; }
+
         /* Navigation */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: var(--surface);
-            padding: 1rem 2rem;
+            padding: 1.25rem 3rem;
             z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 15px rgba(90, 139, 184, 0.15);
+            background: rgba(232, 244, 252, 0.8);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
         }
         
         .nav-logo {
-            font-size: 1.5rem;
+            font-family: 'Syne', sans-serif;
+            font-size: 1.6rem;
             font-weight: 700;
             color: var(--text-dark);
-            text-decoration: none;
         }
         
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             align-items: center;
         }
         
         .nav-links a {
-            color: var(--text-body);
-            text-decoration: none;
             font-weight: 500;
+            font-size: 0.95rem;
             transition: color 0.2s;
+            color: var(--text-body);
         }
         
-        .nav-links a:hover {
-            color: var(--accent);
-        }
+        .nav-links a:hover { color: var(--accent); }
         
         .nav-cta {
-            background: var(--accent) !important;
-            color: white !important;
-            padding: 0.5rem 1.25rem;
-            border-radius: 50px;
-        }
-        
-        .nav-cta:hover {
-            background: var(--accent-dark) !important;
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 9rem 2rem 5rem;
-            text-align: center;
-            max-width: 850px;
-            margin: 0 auto;
-        }
-        
-        .hero-badge {
-            display: inline-block;
-            background: var(--accent-light);
-            color: var(--accent-dark);
-            padding: 0.5rem 1.25rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-        }
-        
-        .hero-logo {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-        }
-        
-        .hero-tagline {
-            font-size: 1.4rem;
-            color: var(--accent);
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-        }
-        
-        .hero-description {
-            font-size: 1.2rem;
-            color: var(--text-body);
-            margin-bottom: 2.5rem;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 0.875rem 2rem;
-            border-radius: 50px;
+            background: var(--text-dark);
+            color: var(--surface) !important;
+            padding: 0.65rem 1.5rem;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.2s;
-            display: inline-block;
+            transition: all 0.3s;
         }
         
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: var(--accent-dark);
+        .nav-cta:hover { 
+            background: var(--accent-dark); 
             transform: translateY(-2px);
         }
-        
-        .btn-secondary {
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 3rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--accent-dark);
+            margin-bottom: 2rem;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .highlight {
+            position: relative;
+            color: var(--accent);
+        }
+
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0.1em;
+            left: 0;
+            right: 0;
+            height: 0.15em;
+            background: var(--accent-light);
+            z-index: -1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.35rem;
+            color: var(--text-body);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--text-dark);
+            color: var(--surface);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px var(--glow);
+        }
+
+        .btn-ghost {
+            background: transparent;
             color: var(--text-dark);
             border: 2px solid var(--border);
         }
-        
-        .btn-secondary:hover {
+
+        .btn-ghost:hover {
             border-color: var(--accent);
             color: var(--accent);
         }
 
-        /* Section styling */
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            color: var(--text-dark);
+        .scroll-prompt {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .scroll-prompt .arrow {
+            width: 24px;
+            height: 24px;
+            border-right: 2px solid var(--text-muted);
+            border-bottom: 2px solid var(--text-muted);
+            transform: rotate(45deg);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50% { transform: rotate(45deg) translateY(8px); }
+        }
+
+        /* Problem/Solution Section */
+        .contrast-section {
+            padding: 6rem 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .contrast-card {
+            padding: 3rem;
+            border-radius: 24px;
+            position: relative;
+        }
+
+        .contrast-card.chaos {
+            background: var(--surface);
+            border: 1px solid var(--border);
+        }
+
+        .contrast-card.flow {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: var(--surface);
+        }
+
+        .contrast-card.flow h3,
+        .contrast-card.flow p { color: var(--surface); }
+
+        .contrast-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .contrast-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .task-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .task-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .task-list.crossed li {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .task-list li::before {
+            content: '×';
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .contrast-card.flow .task-list li::before {
+            content: '✓';
+            color: var(--accent-light);
+        }
+
+        .contrast-card.flow .task-list li {
+            text-decoration: none;
+            opacity: 1;
+        }
+
+        /* Horizontal Scroll Section */
+        .horizontal-section {
+            padding: 6rem 0;
+            background: var(--surface);
+            position: relative;
+        }
+
+        .horizontal-header {
+            padding: 0 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .horizontal-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 0.5rem;
         }
-        
-        .section-subtitle {
-            text-align: center;
+
+        .horizontal-header p {
             color: var(--text-muted);
-            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .horizontal-wrapper {
+            overflow: hidden;
+        }
+
+        .horizontal-track {
+            display: flex;
+            gap: 2rem;
+            padding: 0 3rem;
+            width: max-content;
+        }
+
+        .service-card {
+            width: 380px;
+            flex-shrink: 0;
+            background: var(--bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px) rotate(1deg);
+            box-shadow: 0 20px 60px rgba(90, 139, 184, 0.15);
+            border-color: var(--accent);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-tag {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent-dark);
+            padding: 0.35rem 0.85rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
         /* Demo Section */
         .demo-section {
-            padding: 4rem 2rem;
-            background: var(--surface);
+            padding: 8rem 3rem;
+            position: relative;
         }
 
         .demo-container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .demo-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 0.75rem;
+        }
+
+        .demo-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .demo-video-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px var(--glow);
+        }
+
+        .demo-video-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light), var(--accent));
+            border-radius: 22px;
+            z-index: -1;
         }
 
         .demo-video {
             position: relative;
             padding-bottom: 56.25%;
-            border-radius: 16px;
+            background: var(--text-dark);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(90, 139, 184, 0.2);
-            border: 1px solid var(--border);
         }
 
         .demo-video iframe {
@@ -210,405 +474,454 @@
             border: none;
         }
 
-        .demo-caption {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: var(--text-muted);
-            font-size: 0.95rem;
+        .demo-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            filter: blur(120px);
+            opacity: 0.3;
+            border-radius: 50%;
+            z-index: -2;
         }
+        .demo-glow.left { left: -200px; top: 50%; transform: translateY(-50%); }
+        .demo-glow.right { right: -200px; top: 50%; transform: translateY(-50%); }
 
-        /* Coming Soon Section */
-        .coming-soon {
-            padding: 4rem 2rem;
-        }
-
-        .coming-soon-grid {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .coming-card {
-            background: var(--surface);
-            border-radius: 16px;
-            padding: 2rem;
-            border: 1px solid var(--border);
+        /* Manifesto Strip */
+        .manifesto {
+            padding: 6rem 3rem;
+            background: var(--text-dark);
             position: relative;
             overflow: hidden;
+            transform: skewY(-2deg);
+            margin: 4rem 0;
         }
 
-        .coming-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+        .manifesto-inner {
+            transform: skewY(2deg);
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
         }
 
-        .coming-badge {
-            display: inline-block;
-            background: var(--accent-light);
-            color: var(--accent-dark);
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
+        .manifesto blockquote {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.75rem, 4vw, 3rem);
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 1rem;
+            color: var(--surface);
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
         }
 
-        .coming-card h3 {
-            color: var(--text-dark);
-            font-size: 1.2rem;
+        .manifesto cite {
+            color: var(--accent-light);
+            font-style: normal;
+            font-size: 1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-content p {
+            font-size: 1.15rem;
+            color: var(--text-body);
+            margin-bottom: 2rem;
+        }
+
+        .cta-card {
+            background: var(--surface);
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 60px rgba(90, 139, 184, 0.1);
+        }
+
+        .cta-card h3 {
+            font-size: 1.5rem;
             margin-bottom: 0.5rem;
         }
 
-        .coming-card p {
+        .cta-card .title {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            margin-bottom: 2rem;
         }
 
-        .coming-shimmer {
-            height: 120px;
-            background: linear-gradient(110deg, var(--bg) 0%, var(--border) 40%, var(--bg) 60%, var(--border) 100%);
-            background-size: 300% 100%;
-            animation: shimmer 3s ease-in-out infinite;
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg);
             border-radius: 12px;
-            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .contact-link:hover {
+            background: var(--accent-light);
+            transform: translateX(5px);
+        }
+
+        .contact-link .icon {
+            width: 40px;
+            height: 40px;
+            background: var(--surface);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer-copy {
             color: var(--text-muted);
             font-size: 0.85rem;
         }
 
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* How It Works */
-        .how-it-works {
-            padding: 4rem 2rem;
-            background: var(--surface);
-        }
-        
-        .steps {
-            max-width: 800px;
-            margin: 0 auto;
-            display: grid;
-            gap: 2.5rem;
-        }
-        
-        .step {
-            display: flex;
-            gap: 1.5rem;
-            align-items: flex-start;
-        }
-        
-        .step-number {
-            width: 56px;
-            height: 56px;
-            background: var(--accent-light);
-            color: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-        }
-        
-        .step-content h3 {
-            color: var(--text-dark);
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .step-content p {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        /* Who It's For */
-        .who-section {
-            padding: 4rem 2rem;
-        }
-
-        .who-grid {
-            max-width: 800px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-        }
-
-        .who-item {
-            background: var(--surface);
-            padding: 1.25rem 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .who-icon {
-            font-size: 1.5rem;
-        }
-
-        .who-item span {
-            color: var(--text-dark);
-            font-weight: 500;
-        }
-        
-        /* Contact Section */
-        .contact {
-            padding: 4rem 2rem;
-            background: var(--surface);
-            text-align: center;
-        }
-        
-        .contact-card {
-            max-width: 500px;
-            margin: 0 auto;
-            background: var(--bg);
-            padding: 2.5rem;
-            border-radius: 20px;
-        }
-        
-        .contact-name {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 0.25rem;
-        }
-        
-        .contact-title {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-        }
-        
-        .contact-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-        
-        .contact-links a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .contact-links a:hover {
-            text-decoration: underline;
-        }
-        
-        /* Footer */
-        footer {
-            padding: 2rem;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-        
-        footer a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-        
         /* Mobile */
+        @media (max-width: 1024px) {
+            .contrast-section,
+            .cta-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .horizontal-track {
+                padding: 0 1.5rem;
+            }
+
+            .service-card { width: 320px; }
+        }
+
         @media (max-width: 768px) {
             nav {
-                padding: 1rem;
-            }
-            
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-            
-            .hero {
-                padding: 7rem 1.5rem 3rem;
-            }
-            
-            .hero-logo {
-                font-size: 2.5rem;
-            }
-            
-            .hero-tagline {
-                font-size: 1.15rem;
-            }
-            
-            .hero-description {
-                font-size: 1rem;
-            }
-            
-            .step {
-                flex-direction: column;
-                text-align: center;
-                align-items: center;
-            }
-            
-            .demo-section, .coming-soon, .how-it-works, .who-section, .contact {
-                padding: 3rem 1.5rem;
+                padding: 1rem 1.5rem;
             }
 
-            .section-title {
-                font-size: 1.6rem;
+            .nav-links {
+                gap: 1.5rem;
             }
-        }
-        
-        @media (max-width: 480px) {
+
             .nav-links a:not(.nav-cta) {
                 display: none;
+            }
+
+            .hero {
+                padding: 7rem 1.5rem 4rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .contrast-section,
+            .demo-section,
+            .cta-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .contrast-card {
+                padding: 2rem;
+            }
+
+            .horizontal-header {
+                padding: 0 1.5rem;
+            }
+
+            .manifesto {
+                padding: 4rem 1.5rem;
+            }
+
+            .cta-card {
+                padding: 2rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Floating Blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- Navigation -->
     <nav>
         <a href="./" class="nav-logo">flowly</a>
         <div class="nav-links">
-            <a href="#demo">Demo</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#contact" class="nav-cta">Let's Talk</a>
+            <a href="./services.html">Services</a>
+            <a href="./process.html">Process</a>
+            <a href="./contact.html" class="nav-cta">Let's Talk</a>
         </div>
     </nav>
-    
+
+    <!-- Hero -->
     <section class="hero">
-        <span class="hero-badge">🤖 AI Automation</span>
-        <div class="hero-logo">flowly</div>
-        <p class="hero-tagline">AI automation for business owners</p>
-        <p class="hero-description">
-            Stop doing busywork. I help entrepreneurs implement AI automations 
-            that save hours every week — so you can focus on growing your business.
-        </p>
-        <div class="hero-buttons">
-            <a href="#contact" class="btn btn-primary">Book a Free Call →</a>
-            <a href="#demo" class="btn btn-secondary">Watch Demo</a>
+        <div class="hero-content">
+            <div class="hero-eyebrow">AI Automation Consulting</div>
+            <h1>Stop doing the work <span class="highlight">AI should do</span></h1>
+            <p class="hero-subtitle">
+                I help business owners identify repetitive tasks and build custom AI automations 
+                that handle them — so you can focus on what actually grows your business.
+            </p>
+            <div class="hero-actions">
+                <a href="./contact.html" class="btn btn-primary">Book a Free Call <span>→</span></a>
+                <a href="#demo" class="btn btn-ghost">Watch Demo</a>
+            </div>
+        </div>
+        <div class="scroll-prompt">
+            <span>Scroll to explore</span>
+            <div class="arrow"></div>
         </div>
     </section>
 
+    <!-- Problem / Solution -->
+    <section class="contrast-section">
+        <div class="contrast-card chaos">
+            <div class="contrast-label">Your day right now</div>
+            <h3>Drowning in busywork</h3>
+            <ul class="task-list crossed">
+                <li>Manually sorting emails for 30 min</li>
+                <li>Copy-pasting data between apps</li>
+                <li>Writing the same follow-up 10x</li>
+                <li>Generating quotes by hand</li>
+                <li>Scheduling back-and-forth</li>
+            </ul>
+        </div>
+        <div class="contrast-card flow">
+            <div class="contrast-label">Your day with Flowly</div>
+            <h3>Focus on what matters</h3>
+            <ul class="task-list">
+                <li>AI sorts and drafts responses</li>
+                <li>Data syncs automatically</li>
+                <li>Smart follow-ups send themselves</li>
+                <li>Quotes generated from voice notes</li>
+                <li>Calendar handles itself</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Horizontal Scroll Services -->
+    <section class="horizontal-section">
+        <div class="horizontal-header">
+            <h2>What I can build for you</h2>
+            <p>Drag or scroll to explore automations</p>
+        </div>
+        <div class="horizontal-wrapper">
+            <div class="horizontal-track" id="serviceTrack">
+                <div class="service-card">
+                    <div class="service-icon">📧</div>
+                    <h3>Email Autopilot</h3>
+                    <p>AI reads, sorts, and drafts responses. You just review and send. Works with Gmail, Outlook, or whatever you use.</p>
+                    <span class="service-tag">Most Popular</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔄</div>
+                    <h3>Lead Follow-Up Bot</h3>
+                    <p>Never forget a lead again. Personalized follow-ups that don't sound like robots — because they're trained on your voice.</p>
+                    <span class="service-tag">Sales</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📝</div>
+                    <h3>Voice-to-Quote</h3>
+                    <p>Record a 30-second voice note about a job. Get a professional quote PDF in your inbox. That simple.</p>
+                    <span class="service-tag">Service Businesses</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔗</div>
+                    <h3>App Connector</h3>
+                    <p>Make your tools talk to each other. CRM to invoicing, forms to spreadsheets, calendar to tasks — automated.</p>
+                    <span class="service-tag">Operations</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💬</div>
+                    <h3>Customer Support Bot</h3>
+                    <p>Answer FAQs 24/7 without hiring. Trained on your business, sounds like you, escalates when needed.</p>
+                    <span class="service-tag">Support</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Video -->
     <section class="demo-section" id="demo">
+        <div class="demo-glow left"></div>
+        <div class="demo-glow right"></div>
         <div class="demo-container">
-            <h2 class="section-title">See It In Action</h2>
-            <p class="section-subtitle">Real automation, real time savings</p>
-            
-            <div class="demo-video">
-                <iframe src="https://www.loom.com/embed/b059eb8c640945e7a12797c826fd6554" allowfullscreen></iframe>
+            <div class="demo-header">
+                <h2>See it in action</h2>
+                <p>A real automation walkthrough — no fluff, just results</p>
             </div>
-            <p class="demo-caption">A walkthrough of an AI automation built for a real client</p>
-        </div>
-    </section>
-
-    <section class="coming-soon">
-        <h2 class="section-title">More Automations Coming</h2>
-        <p class="section-subtitle">Custom-built solutions based on what your business actually needs</p>
-        
-        <div class="coming-soon-grid">
-            <div class="coming-card">
-                <span class="coming-badge">Coming Soon</span>
-                <h3>Smart Email Sorting</h3>
-                <p>AI reads your inbox and drafts responses, flags urgent items, and archives the noise.</p>
-                <div class="coming-shimmer">Demo in progress...</div>
-            </div>
-            
-            <div class="coming-card">
-                <span class="coming-badge">Coming Soon</span>
-                <h3>Lead Follow-Up Bot</h3>
-                <p>Automatically follow up with leads who haven't responded. Personalized, not spammy.</p>
-                <div class="coming-shimmer">Demo in progress...</div>
-            </div>
-            
-            <div class="coming-card">
-                <span class="coming-badge">Coming Soon</span>
-                <h3>Invoice & Quote Generator</h3>
-                <p>Generate professional quotes and invoices from a quick voice note or text message.</p>
-                <div class="coming-shimmer">Demo in progress...</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="how-it-works" id="how-it-works">
-        <h2 class="section-title">How It Works</h2>
-        <p class="section-subtitle">Simple process, custom results</p>
-        
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Discovery Call</h3>
-                    <p>We hop on a quick call to understand your workflow and identify the pain points that eat up your time.</p>
-                </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Diagnose & Design</h3>
-                    <p>I figure out exactly where AI can automate tasks and make your work more efficient. No fluff — just practical solutions.</p>
-                </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Build & Teach</h3>
-                    <p>I create the automation tailored to your needs, then walk you through how to use it. You'll own it completely.</p>
+            <div class="demo-video-wrapper">
+                <div class="demo-video">
+                    <iframe src="https://www.loom.com/embed/b059eb8c640945e7a12797c826fd6554" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="who-section">
-        <h2 class="section-title">Built For</h2>
-        <p class="section-subtitle">Business owners who'd rather work on their business, not in it</p>
-        
-        <div class="who-grid">
-            <div class="who-item">
-                <span class="who-icon">🏪</span>
-                <span>Small Business Owners</span>
-            </div>
-            <div class="who-item">
-                <span class="who-icon">🚀</span>
-                <span>Solo Entrepreneurs</span>
-            </div>
-            <div class="who-item">
-                <span class="who-icon">🏠</span>
-                <span>Service Providers</span>
-            </div>
-            <div class="who-item">
-                <span class="who-icon">📈</span>
-                <span>Growing Agencies</span>
-            </div>
+    <!-- Manifesto -->
+    <section class="manifesto">
+        <div class="manifesto-inner">
+            <blockquote>"Your time is worth more than copy-paste. Let's automate the boring stuff so you can do the work that actually matters."</blockquote>
+            <cite>— The Flowly Philosophy</cite>
         </div>
     </section>
-    
-    <section class="contact" id="contact">
-        <h2 class="section-title">Let's Talk</h2>
-        <p class="section-subtitle">Book a free discovery call — no commitment, just a conversation</p>
-        
-        <div class="contact-card">
-            <div class="contact-name">Geetesh Parelly</div>
-            <p class="contact-title">Founder, Flowly</p>
-            <div class="contact-links">
-                <a href="tel:737-287-5336">📞 (737) 287-5336</a>
-                <a href="mailto:geetesh.parelly@2hourlearning.com">✉️ geetesh.parelly@2hourlearning.com</a>
-                <a href="https://x.com/GeeteshParelly" target="_blank">𝕏 @GeeteshParelly</a>
-            </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to reclaim your time?</h2>
+            <p>Let's hop on a quick call. I'll learn about your workflow, identify what's eating your hours, and show you exactly what we can automate. No pressure, no pitch — just clarity.</p>
+            <a href="./process.html" class="btn btn-ghost">See how it works →</a>
+        </div>
+        <div class="cta-card">
+            <h3>Geetesh Parelly</h3>
+            <p class="title">Founder, Flowly</p>
+            <a href="tel:737-287-5336" class="contact-link">
+                <span class="icon">📞</span>
+                <span>(737) 287-5336</span>
+            </a>
+            <a href="mailto:geetesh.parelly@2hourlearning.com" class="contact-link">
+                <span class="icon">✉️</span>
+                <span>geetesh.parelly@2hourlearning.com</span>
+            </a>
+            <a href="https://x.com/GeeteshParelly" target="_blank" class="contact-link">
+                <span class="icon">𝕏</span>
+                <span>@GeeteshParelly</span>
+            </a>
         </div>
     </section>
-    
+
+    <!-- Footer -->
     <footer>
-        <p>© 2026 Flowly · Built in Austin, TX</p>
+        <div class="footer-logo">flowly</div>
+        <div class="footer-links">
+            <a href="./services.html">Services</a>
+            <a href="./process.html">Process</a>
+            <a href="./contact.html">Contact</a>
+        </div>
+        <p class="footer-copy">© 2026 Flowly · Built in Austin, TX</p>
     </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero animations
+        gsap.from('.hero-eyebrow', { y: 30, opacity: 0, duration: 0.8, delay: 0.2, immediateRender: false });
+        gsap.from('.hero h1', { y: 50, opacity: 0, duration: 1, delay: 0.4, immediateRender: false });
+        gsap.from('.hero-subtitle', { y: 30, opacity: 0, duration: 0.8, delay: 0.6, immediateRender: false });
+        gsap.from('.hero-actions', { y: 30, opacity: 0, duration: 0.8, delay: 0.8, immediateRender: false });
+
+        // Contrast cards
+        gsap.from('.contrast-card.chaos', {
+            x: -60, opacity: 0, rotation: -3, duration: 1, ease: 'power3.out',
+            immediateRender: false,
+            scrollTrigger: { trigger: '.contrast-section', start: 'top 75%' }
+        });
+        gsap.from('.contrast-card.flow', {
+            x: 60, opacity: 0, rotation: 3, duration: 1, delay: 0.2, ease: 'power3.out',
+            immediateRender: false,
+            scrollTrigger: { trigger: '.contrast-section', start: 'top 75%' }
+        });
+
+        // Service cards stagger
+        gsap.from('.service-card', {
+            y: 60, opacity: 0, rotation: 2, duration: 0.8, stagger: 0.15, ease: 'power3.out',
+            immediateRender: false,
+            scrollTrigger: { trigger: '.horizontal-section', start: 'top 70%' }
+        });
+
+        // Demo section
+        gsap.from('.demo-video-wrapper', {
+            scale: 0.9, opacity: 0, duration: 1, ease: 'power3.out',
+            immediateRender: false,
+            scrollTrigger: { trigger: '.demo-section', start: 'top 70%' }
+        });
+
+        // Manifesto
+        gsap.from('.manifesto blockquote', {
+            y: 40, opacity: 0, duration: 1, ease: 'power3.out',
+            immediateRender: false,
+            scrollTrigger: { trigger: '.manifesto', start: 'top 80%' }
+        });
+
+        // Horizontal scroll drag
+        const track = document.getElementById('serviceTrack');
+        let isDragging = false;
+        let startX, scrollLeft;
+
+        track.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            track.style.cursor = 'grabbing';
+            startX = e.pageX - track.offsetLeft;
+            scrollLeft = track.parentElement.scrollLeft;
+        });
+
+        track.addEventListener('mouseleave', () => { isDragging = false; track.style.cursor = 'grab'; });
+        track.addEventListener('mouseup', () => { isDragging = false; track.style.cursor = 'grab'; });
+        track.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - track.offsetLeft;
+            const walk = (x - startX) * 2;
+            track.parentElement.scrollLeft = scrollLeft - walk;
+        });
+
+        // Blob parallax
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            document.querySelectorAll('.blob').forEach((blob, i) => {
+                const speed = (i + 1) * 20;
+                blob.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+    </script>
 </body>
 </html>

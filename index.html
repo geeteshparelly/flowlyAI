@@ -220,7 +220,7 @@
             50% { transform: rotate(45deg) translateY(8px); }
         }
 
-        /* Process Section - THE MAIN OFFER */
+        /* Process Section - Timeline Style */
         .process-section {
             padding: 6rem 3rem;
             background: var(--surface);
@@ -242,136 +242,110 @@
             color: var(--text-body);
         }
 
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            max-width: 1100px;
+        .process-timeline {
+            max-width: 1000px;
             margin: 0 auto;
+            position: relative;
         }
 
-        .process-step {
-            text-align: center;
-            padding: 2.5rem 2rem;
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--accent-light), var(--accent), var(--accent-light));
+            border-radius: 3px;
+        }
+
+        .process-item {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .process-item:last-child { margin-bottom: 0; }
+
+        .process-content {
             background: var(--bg);
+            padding: 2rem;
             border-radius: 20px;
             border: 1px solid var(--border);
-            position: relative;
             transition: all 0.3s;
         }
 
-        .process-step:hover {
+        .process-content:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(90, 139, 184, 0.15);
+            border-color: var(--accent);
         }
 
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+        .process-item:nth-child(odd) .process-content {
+            grid-column: 1;
+            text-align: right;
+        }
+
+        .process-item:nth-child(even) .process-content {
+            grid-column: 3;
+        }
+
+        .process-item:nth-child(odd) .process-visual {
+            grid-column: 3;
+        }
+
+        .process-item:nth-child(even) .process-visual {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .process-node {
+            grid-column: 2;
+            width: 80px;
+            height: 80px;
+            background: var(--surface);
+            border: 3px solid var(--accent);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Syne', sans-serif;
             font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .process-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .process-visual {
+            height: 140px;
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--surface);
-            margin: 0 auto 1.5rem;
-        }
-
-        .process-step h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .process-step p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .process-arrow {
-            position: absolute;
-            right: -1.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--accent);
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .process-step:last-child .process-arrow {
-            display: none;
-        }
-
-        /* Examples Section */
-        .examples-section {
-            padding: 6rem 3rem;
-        }
-
-        .examples-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 3rem;
-        }
-
-        .examples-header h2 {
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            margin-bottom: 0.75rem;
-        }
-
-        .examples-header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        .examples-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .example-card {
-            background: var(--surface);
-            border-radius: 16px;
-            padding: 2rem;
-            border: 1px solid var(--border);
-            transition: all 0.3s;
-        }
-
-        .example-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(90, 139, 184, 0.1);
-            border-color: var(--accent);
-        }
-
-        .example-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .example-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-
-        .example-tag {
-            display: inline-block;
-            background: var(--accent-light);
-            color: var(--accent-dark);
-            padding: 0.3rem 0.75rem;
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            opacity: 0.9;
         }
 
         /* Demo Section */
         .demo-section {
             padding: 6rem 3rem;
-            background: var(--surface);
             position: relative;
         }
 
@@ -532,12 +506,29 @@
         }
 
         @media (max-width: 900px) {
-            .process-steps {
-                grid-template-columns: 1fr;
-                max-width: 400px;
+            .process-timeline::before {
+                left: 40px;
             }
 
-            .process-arrow {
+            .process-item {
+                grid-template-columns: 80px 1fr;
+                gap: 1.5rem;
+            }
+
+            .process-node {
+                grid-column: 1;
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+
+            .process-item:nth-child(odd) .process-content,
+            .process-item:nth-child(even) .process-content {
+                grid-column: 2;
+                text-align: left;
+            }
+
+            .process-visual {
                 display: none;
             }
         }
@@ -551,7 +542,6 @@
             .hero-subtitle { font-size: 1.1rem; }
 
             .process-section,
-            .examples-section,
             .demo-section,
             .cta-section {
                 padding: 4rem 1.5rem;
@@ -592,59 +582,36 @@
         </div>
     </section>
 
-    <!-- The Process - MAIN OFFER -->
+    <!-- The Process - Timeline Style -->
     <section class="process-section" id="process">
         <div class="process-header">
             <h2>How it works</h2>
             <p>A simple process that starts with your problems and ends with solutions built specifically for your business.</p>
         </div>
-        <div class="process-steps">
-            <div class="process-step">
-                <div class="step-number">1</div>
-                <h3>Discovery Call</h3>
-                <p>We talk through your day. What takes too long? What's repetitive? What do you wish you could hand off? No prep needed.</p>
-                <span class="process-arrow">></span>
+        <div class="process-timeline">
+            <div class="process-item">
+                <div class="process-content">
+                    <h3>Discovery Call</h3>
+                    <p>We talk through your day. What takes too long? What's repetitive? What do you wish you could hand off?</p>
+                </div>
+                <div class="process-node">1</div>
+                <div class="process-visual">30 min call</div>
             </div>
-            <div class="process-step">
-                <div class="step-number">2</div>
-                <h3>Diagnosis</h3>
-                <p>I identify exactly where AI can help. Not everything should be automated. I'll tell you what's worth it and what's not.</p>
-                <span class="process-arrow">></span>
+            <div class="process-item">
+                <div class="process-content">
+                    <h3>Diagnosis</h3>
+                    <p>I identify exactly where AI can help and what's not worth automating. You get a clear roadmap and fixed quote.</p>
+                </div>
+                <div class="process-node">2</div>
+                <div class="process-visual">Custom plan</div>
             </div>
-            <div class="process-step">
-                <div class="step-number">3</div>
-                <h3>Implementation</h3>
-                <p>I build your custom automation, walk you through it, and hand it over. You own it completely. No subscriptions, no lock-in.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- What Clients Have Built - Examples, not a menu -->
-    <section class="examples-section">
-        <div class="examples-header">
-            <h2>What clients have built</h2>
-            <p>Every business is different. Here's what past clients needed.</p>
-        </div>
-        <div class="examples-grid">
-            <div class="example-card">
-                <h3>Payroll Automation</h3>
-                <p>Turned a 2-hour weekly task into a 5-minute review. Data pulled automatically, formatted, ready to submit.</p>
-                <span class="example-tag">Operations</span>
-            </div>
-            <div class="example-card">
-                <h3>Email Sorting + Drafts</h3>
-                <p>AI reads incoming emails, sorts by priority, and drafts responses. Owner just reviews and sends.</p>
-                <span class="example-tag">Communication</span>
-            </div>
-            <div class="example-card">
-                <h3>Lead Follow-Up</h3>
-                <p>Automatic follow-ups that sound human, not robotic. Trained on the owner's voice and style.</p>
-                <span class="example-tag">Sales</span>
-            </div>
-            <div class="example-card">
-                <h3>Quote Generator</h3>
-                <p>Voice note in, professional PDF quote out. No more typing up estimates manually.</p>
-                <span class="example-tag">Service Business</span>
+            <div class="process-item">
+                <div class="process-content">
+                    <h3>Implementation</h3>
+                    <p>I build your custom automation, walk you through it, and hand it over. You own it completely.</p>
+                </div>
+                <div class="process-node">3</div>
+                <div class="process-visual">1-2 weeks</div>
             </div>
         </div>
     </section>
@@ -700,16 +667,25 @@
         gsap.from('.hero-subtitle', { y: 30, opacity: 0, duration: 0.8, delay: 0.4, immediateRender: false });
         gsap.from('.hero-actions', { y: 30, opacity: 0, duration: 0.8, delay: 0.6, immediateRender: false });
 
-        gsap.from('.process-step', {
-            y: 50, opacity: 0, duration: 0.7, stagger: 0.2, ease: 'power3.out',
-            immediateRender: false,
-            scrollTrigger: { trigger: '.process-section', start: 'top 75%' }
-        });
-
-        gsap.from('.example-card', {
-            y: 40, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out',
-            immediateRender: false,
-            scrollTrigger: { trigger: '.examples-section', start: 'top 75%' }
+        document.querySelectorAll('.process-item').forEach((item, i) => {
+            const direction = i % 2 === 0 ? -60 : 60;
+            gsap.from(item.querySelector('.process-content'), {
+                x: direction, opacity: 0, duration: 0.8, ease: 'power3.out',
+                immediateRender: false,
+                scrollTrigger: { trigger: item, start: 'top 80%' }
+            });
+            gsap.from(item.querySelector('.process-node'), {
+                scale: 0, opacity: 0, duration: 0.5, delay: 0.2, ease: 'back.out(1.7)',
+                immediateRender: false,
+                scrollTrigger: { trigger: item, start: 'top 80%' }
+            });
+            if (item.querySelector('.process-visual')) {
+                gsap.from(item.querySelector('.process-visual'), {
+                    x: -direction, opacity: 0, duration: 0.8, delay: 0.1, ease: 'power3.out',
+                    immediateRender: false,
+                    scrollTrigger: { trigger: item, start: 'top 80%' }
+                });
+            }
         });
 
         gsap.from('.demo-video-wrapper', {

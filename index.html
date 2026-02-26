@@ -35,7 +35,6 @@
             overflow-x: hidden;
         }
 
-        /* Grain overlay */
         body::after {
             content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.025;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -44,7 +43,6 @@
         h1, h2, h3, h4 { font-family: 'Syne', sans-serif; color: var(--text-dark); }
         a { color: inherit; text-decoration: none; }
 
-        /* Floating blobs */
         .blob {
             position: absolute;
             border-radius: 50%;
@@ -57,7 +55,6 @@
         .blob-2 { width: 300px; height: 300px; background: var(--accent); opacity: 0.2; bottom: 20%; left: -100px; }
         .blob-3 { width: 250px; height: 250px; background: var(--accent-light); top: 40%; right: 10%; }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -109,7 +106,6 @@
             transform: translateY(-2px);
         }
 
-        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -124,34 +120,6 @@
             max-width: 900px;
             position: relative;
             z-index: 1;
-        }
-
-        .hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 0.5rem 1rem;
-            border-radius: 100px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--accent-dark);
-            margin-bottom: 2rem;
-        }
-
-        .hero-eyebrow::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
         }
 
         .hero h1 {
@@ -252,7 +220,6 @@
             50% { transform: rotate(45deg) translateY(8px); }
         }
 
-        /* Problem/Solution Section */
         .contrast-section {
             padding: 6rem 3rem;
             display: grid;
@@ -315,24 +282,21 @@
             opacity: 0.6;
         }
 
-        .task-list li::before {
-            content: '×';
-            font-size: 1.2rem;
+        .task-list li .icon {
+            font-size: 1rem;
             font-weight: bold;
-            color: #e74c3c;
+            width: 20px;
+            text-align: center;
         }
 
-        .contrast-card.flow .task-list li::before {
-            content: '✓';
-            color: var(--accent-light);
-        }
+        .task-list.crossed li .icon { color: #e74c3c; }
+        .contrast-card.flow .task-list li .icon { color: var(--accent-light); }
 
         .contrast-card.flow .task-list li {
             text-decoration: none;
             opacity: 1;
         }
 
-        /* Horizontal Scroll Section */
         .horizontal-section {
             padding: 6rem 0;
             background: var(--surface);
@@ -389,7 +353,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--surface);
             margin-bottom: 1.5rem;
         }
 
@@ -414,7 +380,6 @@
             font-weight: 600;
         }
 
-        /* Demo Section */
         .demo-section {
             padding: 8rem 3rem;
             position: relative;
@@ -487,7 +452,6 @@
         .demo-glow.left { left: -200px; top: 50%; transform: translateY(-50%); }
         .demo-glow.right { right: -200px; top: 50%; transform: translateY(-50%); }
 
-        /* Manifesto Strip */
         .manifesto {
             padding: 6rem 3rem;
             background: var(--text-dark);
@@ -519,7 +483,6 @@
             font-size: 1rem;
         }
 
-        /* CTA Section */
         .cta-section {
             padding: 8rem 3rem;
             display: grid;
@@ -586,10 +549,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
         }
 
-        /* Footer */
         footer {
             padding: 3rem;
             text-align: center;
@@ -624,7 +588,6 @@
             font-size: 0.85rem;
         }
 
-        /* Mobile */
         @media (max-width: 1024px) {
             .contrast-section,
             .cta-section {
@@ -685,12 +648,10 @@
     </style>
 </head>
 <body>
-    <!-- Floating Blobs -->
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
 
-    <!-- Navigation -->
     <nav>
         <a href="./" class="nav-logo">flowly</a>
         <div class="nav-links">
@@ -700,17 +661,14 @@
         </div>
     </nav>
 
-    <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
-            <div class="hero-eyebrow">AI Automation Consulting</div>
             <h1>Stop doing the work <span class="highlight">AI should do</span></h1>
             <p class="hero-subtitle">
-                I help business owners identify repetitive tasks and build custom AI automations 
-                that handle them — so you can focus on what actually grows your business.
+                I help business owners identify repetitive tasks and build custom AI automations that handle them, so you can focus on what actually grows your business.
             </p>
             <div class="hero-actions">
-                <a href="./contact.html" class="btn btn-primary">Book a Free Call <span>→</span></a>
+                <a href="./contact.html" class="btn btn-primary">Book a Free Call</a>
                 <a href="#demo" class="btn btn-ghost">Watch Demo</a>
             </div>
         </div>
@@ -720,33 +678,31 @@
         </div>
     </section>
 
-    <!-- Problem / Solution -->
     <section class="contrast-section">
         <div class="contrast-card chaos">
             <div class="contrast-label">Your day right now</div>
             <h3>Drowning in busywork</h3>
             <ul class="task-list crossed">
-                <li>Manually sorting emails for 30 min</li>
-                <li>Copy-pasting data between apps</li>
-                <li>Writing the same follow-up 10x</li>
-                <li>Generating quotes by hand</li>
-                <li>Scheduling back-and-forth</li>
+                <li><span class="icon">x</span> Manually sorting emails for 30 min</li>
+                <li><span class="icon">x</span> Copy-pasting data between apps</li>
+                <li><span class="icon">x</span> Writing the same follow-up 10x</li>
+                <li><span class="icon">x</span> Generating quotes by hand</li>
+                <li><span class="icon">x</span> Scheduling back-and-forth</li>
             </ul>
         </div>
         <div class="contrast-card flow">
             <div class="contrast-label">Your day with Flowly</div>
             <h3>Focus on what matters</h3>
             <ul class="task-list">
-                <li>AI sorts and drafts responses</li>
-                <li>Data syncs automatically</li>
-                <li>Smart follow-ups send themselves</li>
-                <li>Quotes generated from voice notes</li>
-                <li>Calendar handles itself</li>
+                <li><span class="icon">+</span> AI sorts and drafts responses</li>
+                <li><span class="icon">+</span> Data syncs automatically</li>
+                <li><span class="icon">+</span> Smart follow-ups send themselves</li>
+                <li><span class="icon">+</span> Quotes generated from voice notes</li>
+                <li><span class="icon">+</span> Calendar handles itself</li>
             </ul>
         </div>
     </section>
 
-    <!-- Horizontal Scroll Services -->
     <section class="horizontal-section">
         <div class="horizontal-header">
             <h2>What I can build for you</h2>
@@ -755,31 +711,31 @@
         <div class="horizontal-wrapper">
             <div class="horizontal-track" id="serviceTrack">
                 <div class="service-card">
-                    <div class="service-icon">📧</div>
+                    <div class="service-icon">01</div>
                     <h3>Email Autopilot</h3>
                     <p>AI reads, sorts, and drafts responses. You just review and send. Works with Gmail, Outlook, or whatever you use.</p>
                     <span class="service-tag">Most Popular</span>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">🔄</div>
+                    <div class="service-icon">02</div>
                     <h3>Lead Follow-Up Bot</h3>
-                    <p>Never forget a lead again. Personalized follow-ups that don't sound like robots — because they're trained on your voice.</p>
+                    <p>Never forget a lead again. Personalized follow-ups that don't sound like robots, because they're trained on your voice.</p>
                     <span class="service-tag">Sales</span>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">📝</div>
+                    <div class="service-icon">03</div>
                     <h3>Voice-to-Quote</h3>
                     <p>Record a 30-second voice note about a job. Get a professional quote PDF in your inbox. That simple.</p>
                     <span class="service-tag">Service Businesses</span>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">🔗</div>
+                    <div class="service-icon">04</div>
                     <h3>App Connector</h3>
-                    <p>Make your tools talk to each other. CRM to invoicing, forms to spreadsheets, calendar to tasks — automated.</p>
+                    <p>Make your tools talk to each other. CRM to invoicing, forms to spreadsheets, calendar to tasks, all automated.</p>
                     <span class="service-tag">Operations</span>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">💬</div>
+                    <div class="service-icon">05</div>
                     <h3>Customer Support Bot</h3>
                     <p>Answer FAQs 24/7 without hiring. Trained on your business, sounds like you, escalates when needed.</p>
                     <span class="service-tag">Support</span>
@@ -788,14 +744,13 @@
         </div>
     </section>
 
-    <!-- Demo Video -->
     <section class="demo-section" id="demo">
         <div class="demo-glow left"></div>
         <div class="demo-glow right"></div>
         <div class="demo-container">
             <div class="demo-header">
                 <h2>See it in action</h2>
-                <p>A real automation walkthrough — no fluff, just results</p>
+                <p>A real automation walkthrough, no fluff, just results</p>
             </div>
             <div class="demo-video-wrapper">
                 <div class="demo-video">
@@ -805,40 +760,37 @@
         </div>
     </section>
 
-    <!-- Manifesto -->
     <section class="manifesto">
         <div class="manifesto-inner">
             <blockquote>"Your time is worth more than copy-paste. Let's automate the boring stuff so you can do the work that actually matters."</blockquote>
-            <cite>— The Flowly Philosophy</cite>
+            <cite>The Flowly Philosophy</cite>
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="cta-section">
         <div class="cta-content">
             <h2>Ready to reclaim your time?</h2>
-            <p>Let's hop on a quick call. I'll learn about your workflow, identify what's eating your hours, and show you exactly what we can automate. No pressure, no pitch — just clarity.</p>
-            <a href="./process.html" class="btn btn-ghost">See how it works →</a>
+            <p>Let's hop on a quick call. I'll learn about your workflow, identify what's eating your hours, and show you exactly what we can automate. No pressure, no pitch, just clarity.</p>
+            <a href="./process.html" class="btn btn-ghost">See how it works</a>
         </div>
         <div class="cta-card">
             <h3>Geetesh Parelly</h3>
             <p class="title">Founder, Flowly</p>
             <a href="tel:737-287-5336" class="contact-link">
-                <span class="icon">📞</span>
+                <span class="icon">tel</span>
                 <span>(737) 287-5336</span>
             </a>
             <a href="mailto:geetesh.parelly@2hourlearning.com" class="contact-link">
-                <span class="icon">✉️</span>
+                <span class="icon">@</span>
                 <span>geetesh.parelly@2hourlearning.com</span>
             </a>
             <a href="https://x.com/GeeteshParelly" target="_blank" class="contact-link">
-                <span class="icon">𝕏</span>
+                <span class="icon">X</span>
                 <span>@GeeteshParelly</span>
             </a>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-logo">flowly</div>
         <div class="footer-links">
@@ -846,19 +798,16 @@
             <a href="./process.html">Process</a>
             <a href="./contact.html">Contact</a>
         </div>
-        <p class="footer-copy">© 2026 Flowly · Built in Austin, TX</p>
+        <p class="footer-copy">2026 Flowly. Built in Austin, TX</p>
     </footer>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Hero animations
-        gsap.from('.hero-eyebrow', { y: 30, opacity: 0, duration: 0.8, delay: 0.2, immediateRender: false });
-        gsap.from('.hero h1', { y: 50, opacity: 0, duration: 1, delay: 0.4, immediateRender: false });
-        gsap.from('.hero-subtitle', { y: 30, opacity: 0, duration: 0.8, delay: 0.6, immediateRender: false });
-        gsap.from('.hero-actions', { y: 30, opacity: 0, duration: 0.8, delay: 0.8, immediateRender: false });
+        gsap.from('.hero h1', { y: 50, opacity: 0, duration: 1, delay: 0.2, immediateRender: false });
+        gsap.from('.hero-subtitle', { y: 30, opacity: 0, duration: 0.8, delay: 0.4, immediateRender: false });
+        gsap.from('.hero-actions', { y: 30, opacity: 0, duration: 0.8, delay: 0.6, immediateRender: false });
 
-        // Contrast cards
         gsap.from('.contrast-card.chaos', {
             x: -60, opacity: 0, rotation: -3, duration: 1, ease: 'power3.out',
             immediateRender: false,
@@ -870,28 +819,24 @@
             scrollTrigger: { trigger: '.contrast-section', start: 'top 75%' }
         });
 
-        // Service cards stagger
         gsap.from('.service-card', {
             y: 60, opacity: 0, rotation: 2, duration: 0.8, stagger: 0.15, ease: 'power3.out',
             immediateRender: false,
             scrollTrigger: { trigger: '.horizontal-section', start: 'top 70%' }
         });
 
-        // Demo section
         gsap.from('.demo-video-wrapper', {
             scale: 0.9, opacity: 0, duration: 1, ease: 'power3.out',
             immediateRender: false,
             scrollTrigger: { trigger: '.demo-section', start: 'top 70%' }
         });
 
-        // Manifesto
         gsap.from('.manifesto blockquote', {
             y: 40, opacity: 0, duration: 1, ease: 'power3.out',
             immediateRender: false,
             scrollTrigger: { trigger: '.manifesto', start: 'top 80%' }
         });
 
-        // Horizontal scroll drag
         const track = document.getElementById('serviceTrack');
         let isDragging = false;
         let startX, scrollLeft;
@@ -913,7 +858,6 @@
             track.parentElement.scrollLeft = scrollLeft - walk;
         });
 
-        // Blob parallax
         document.addEventListener('mousemove', (e) => {
             const x = e.clientX / window.innerWidth;
             const y = e.clientY / window.innerHeight;

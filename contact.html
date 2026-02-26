@@ -42,7 +42,6 @@
         h1, h2, h3, h4 { font-family: 'Syne', sans-serif; color: var(--text-dark); }
         a { color: inherit; text-decoration: none; }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -95,7 +94,6 @@
             transform: translateY(-2px);
         }
 
-        /* Main Split Layout */
         .contact-split {
             min-height: 100vh;
             display: grid;
@@ -123,45 +121,63 @@
             color: var(--accent);
         }
 
-        .contact-left p {
+        .contact-left > p {
             font-size: 1.2rem;
             color: var(--text-body);
             max-width: 450px;
             margin-bottom: 3rem;
         }
 
-        .availability {
+        .direct-contact {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .direct-contact h4 {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .contact-method {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 1.5rem;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
             background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            width: fit-content;
-        }
-
-        .availability-dot {
-            width: 10px;
-            height: 10px;
-            background: #10b981;
-            border-radius: 50%;
-            animation: pulse-green 2s infinite;
-        }
-
-        @keyframes pulse-green {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-            50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-        }
-
-        .availability-text {
-            font-weight: 500;
+            border-radius: 10px;
+            transition: all 0.3s;
             color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            border: 1px solid var(--border);
         }
 
-        .availability-text span {
-            color: var(--text-muted);
-            font-weight: 400;
+        .contact-method:hover {
+            background: var(--accent-light);
+            border-color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .contact-method-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--bg);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
         }
 
         .contact-right {
@@ -173,114 +189,70 @@
             border-left: 1px solid var(--border);
         }
 
-        .contact-card {
+        .form-container {
             max-width: 450px;
         }
 
-        .contact-card h2 {
+        .form-container h2 {
             font-size: 1.75rem;
             margin-bottom: 0.5rem;
         }
 
-        .contact-card .subtitle {
+        .form-container > p {
             color: var(--text-muted);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
-        .contact-methods {
+        .contact-form {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 3rem;
-        }
-
-        .contact-method {
-            display: flex;
-            align-items: center;
             gap: 1.25rem;
-            padding: 1.25rem 1.5rem;
-            background: var(--bg);
-            border-radius: 16px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid transparent;
         }
 
-        .contact-method:hover {
-            background: var(--accent-light);
-            border-color: var(--accent);
-            transform: translateX(8px);
-        }
-
-        .contact-method-icon {
-            width: 52px;
-            height: 52px;
-            background: var(--surface);
-            border-radius: 14px;
+        .form-group {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 15px rgba(90, 139, 184, 0.1);
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
-        .contact-method-info h4 {
-            font-size: 1rem;
-            margin-bottom: 0.15rem;
-        }
-
-        .contact-method-info p {
-            color: var(--text-muted);
+        .form-group label {
+            font-weight: 600;
             font-size: 0.9rem;
+            color: var(--text-dark);
         }
 
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-link {
-            width: 50px;
-            height: 50px;
-            background: var(--bg);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            transition: all 0.3s;
-            border: 1px solid var(--border);
-        }
-
-        .social-link:hover {
-            background: var(--accent);
-            color: var(--surface);
-            border-color: var(--accent);
-            transform: translateY(-4px);
-        }
-
-        /* Calendar placeholder */
-        .calendar-section {
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .calendar-section h3 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .calendar-placeholder {
-            background: linear-gradient(135deg, var(--bg) 0%, var(--accent-light) 100%);
-            border-radius: 16px;
-            padding: 3rem;
-            text-align: center;
-            border: 2px dashed var(--border);
-        }
-
-        .calendar-placeholder p {
+        .form-group label .optional {
+            font-weight: 400;
             color: var(--text-muted);
-            margin-bottom: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text-dark);
+            background: var(--bg);
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: var(--surface);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
         }
 
         .btn {
@@ -291,9 +263,11 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
             border: none;
             cursor: pointer;
+            width: 100%;
         }
 
         .btn-primary {
@@ -304,9 +278,41 @@
         .btn-primary:hover {
             background: var(--accent-dark);
             transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(90, 139, 184, 0.3);
         }
 
-        /* Footer */
+        .form-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-message h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--accent-dark);
+        }
+
+        .success-message p {
+            color: var(--text-body);
+            font-size: 1.1rem;
+        }
+
+        .contact-form.hidden {
+            display: none;
+        }
+
         footer {
             padding: 2rem 3rem;
             text-align: center;
@@ -323,7 +329,6 @@
             color: var(--accent);
         }
 
-        /* Mobile */
         @media (max-width: 1024px) {
             .contact-split {
                 grid-template-columns: 1fr;
@@ -349,18 +354,8 @@
                 font-size: 2.5rem;
             }
 
-            .contact-left p {
+            .contact-left > p {
                 font-size: 1.05rem;
-            }
-
-            .contact-method {
-                padding: 1rem;
-            }
-
-            .contact-method-icon {
-                width: 44px;
-                height: 44px;
-                font-size: 1.25rem;
             }
         }
     </style>
@@ -378,76 +373,115 @@
     <main class="contact-split">
         <div class="contact-left">
             <h1>Let's build <span>something</span></h1>
-            <p>Book a free discovery call. No pitch, no pressure — just a conversation about what's eating your time and whether automation can help.</p>
-            <div class="availability">
-                <div class="availability-dot"></div>
-                <div class="availability-text">
-                    Available for new projects <span>· Responding within 24h</span>
+            <p>Fill out the form and I'll get back to you within minutes. No spam, no sales pitch, just a real conversation about what you need.</p>
+
+            <div class="direct-contact">
+                <h4>Or reach out directly</h4>
+                <div class="contact-methods">
+                    <a href="tel:737-287-5336" class="contact-method">
+                        <div class="contact-method-icon">tel</div>
+                        <span>(737) 287-5336</span>
+                    </a>
+                    <a href="mailto:geetesh.parelly@2hourlearning.com" class="contact-method">
+                        <div class="contact-method-icon">@</div>
+                        <span>geetesh.parelly@2hourlearning.com</span>
+                    </a>
+                    <a href="https://x.com/GeeteshParelly" target="_blank" class="contact-method">
+                        <div class="contact-method-icon">X</div>
+                        <span>@GeeteshParelly</span>
+                    </a>
                 </div>
             </div>
         </div>
 
         <div class="contact-right">
-            <div class="contact-card">
-                <h2>Geetesh Parelly</h2>
-                <p class="subtitle">Founder, Flowly · Austin, TX</p>
+            <div class="form-container">
+                <h2>Get in touch</h2>
+                <p>Tell me about yourself and what you're looking for.</p>
 
-                <div class="contact-methods">
-                    <a href="tel:737-287-5336" class="contact-method">
-                        <div class="contact-method-icon">📞</div>
-                        <div class="contact-method-info">
-                            <h4>(737) 287-5336</h4>
-                            <p>Call or text anytime</p>
-                        </div>
-                    </a>
-                    <a href="mailto:geetesh.parelly@2hourlearning.com" class="contact-method">
-                        <div class="contact-method-icon">✉️</div>
-                        <div class="contact-method-info">
-                            <h4>geetesh.parelly@2hourlearning.com</h4>
-                            <p>Email for detailed inquiries</p>
-                        </div>
-                    </a>
-                    <a href="https://x.com/GeeteshParelly" target="_blank" class="contact-method">
-                        <div class="contact-method-icon">𝕏</div>
-                        <div class="contact-method-info">
-                            <h4>@GeeteshParelly</h4>
-                            <p>DMs open</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="social-links">
-                    <a href="https://x.com/GeeteshParelly" target="_blank" class="social-link" title="X / Twitter">𝕏</a>
-                    <a href="mailto:geetesh.parelly@2hourlearning.com" class="social-link" title="Email">✉️</a>
-                    <a href="tel:737-287-5336" class="social-link" title="Phone">📞</a>
-                </div>
-
-                <div class="calendar-section">
-                    <h3>Or schedule directly</h3>
-                    <div class="calendar-placeholder">
-                        <p>📅 Calendar booking coming soon</p>
-                        <a href="tel:737-287-5336" class="btn btn-primary">Call me instead →</a>
+                <form class="contact-form" id="contactForm" action="https://formspree.io/f/FORM_ID" method="POST">
+                    <div class="form-group">
+                        <label for="name">Your name</label>
+                        <input type="text" id="name" name="name" placeholder="John Smith" required>
                     </div>
+
+                    <div class="form-group">
+                        <label for="business">Business name</label>
+                        <input type="text" id="business" name="business" placeholder="Smith Consulting" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="john@smithconsulting.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">What are you looking to automate? <span class="optional">(optional)</span></label>
+                        <textarea id="message" name="message" placeholder="I spend 2 hours a day on email and I want to get that time back..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Send message</button>
+                    <p class="form-note">I respond within minutes during business hours</p>
+                </form>
+
+                <div class="success-message" id="successMessage">
+                    <h3>Got it!</h3>
+                    <p>I'll be in touch within minutes. Talk soon.</p>
                 </div>
             </div>
         </div>
     </main>
 
     <footer>
-        <p class="footer-copy">© 2026 <a href="./">Flowly</a> · Built in Austin, TX</p>
+        <p class="footer-copy">2026 <a href="./">Flowly</a>. Built in Austin, TX</p>
     </footer>
 
     <script>
-        // Animations
         gsap.from('.contact-left h1', { x: -50, opacity: 0, duration: 0.8, delay: 0.2, immediateRender: false });
-        gsap.from('.contact-left p', { x: -40, opacity: 0, duration: 0.8, delay: 0.4, immediateRender: false });
-        gsap.from('.availability', { y: 20, opacity: 0, duration: 0.6, delay: 0.6, immediateRender: false });
+        gsap.from('.contact-left > p', { x: -40, opacity: 0, duration: 0.8, delay: 0.4, immediateRender: false });
+        gsap.from('.direct-contact', { y: 20, opacity: 0, duration: 0.6, delay: 0.6, immediateRender: false });
 
-        gsap.from('.contact-card h2', { y: 30, opacity: 0, duration: 0.7, delay: 0.3, immediateRender: false });
-        gsap.from('.contact-card .subtitle', { y: 20, opacity: 0, duration: 0.6, delay: 0.4, immediateRender: false });
-        gsap.from('.contact-method', { x: 40, opacity: 0, duration: 0.6, stagger: 0.1, delay: 0.5, immediateRender: false });
-        gsap.from('.social-link', { scale: 0, opacity: 0, duration: 0.4, stagger: 0.1, delay: 0.8, ease: 'back.out(1.7)', immediateRender: false });
-        gsap.from('.calendar-section', { y: 30, opacity: 0, duration: 0.7, delay: 1, immediateRender: false });
+        gsap.from('.form-container h2', { y: 30, opacity: 0, duration: 0.7, delay: 0.3, immediateRender: false });
+        gsap.from('.form-container > p', { y: 20, opacity: 0, duration: 0.6, delay: 0.4, immediateRender: false });
+        gsap.from('.form-group', { y: 30, opacity: 0, duration: 0.5, stagger: 0.1, delay: 0.5, immediateRender: false });
+
+        // Form submission
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            try {
+                // Send to webhook for instant notification
+                await fetch('WEBHOOK_URL_HERE', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                    mode: 'no-cors'
+                });
+            } catch (err) {
+                // Continue even if webhook fails
+            }
+
+            // Also submit to Formspree for email backup
+            try {
+                await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+            } catch (err) {
+                // Continue even if Formspree fails
+            }
+
+            // Show success
+            form.classList.add('hidden');
+            successMessage.classList.add('show');
+        });
     </script>
 </body>
 </html>

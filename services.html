@@ -43,7 +43,6 @@
         h1, h2, h3, h4 { font-family: 'Syne', sans-serif; color: var(--text-dark); }
         a { color: inherit; text-decoration: none; }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -96,7 +95,6 @@
             transform: translateY(-2px);
         }
 
-        /* Page Header */
         .page-header {
             padding: 10rem 3rem 4rem;
             max-width: 900px;
@@ -116,7 +114,6 @@
             max-width: 600px;
         }
 
-        /* Bento Grid */
         .bento-section {
             padding: 2rem 3rem 6rem;
             max-width: 1300px;
@@ -172,12 +169,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-dark);
             margin-bottom: 1.5rem;
         }
 
         .bento-card.featured .bento-icon {
             background: rgba(255,255,255,0.2);
+            color: var(--surface);
         }
 
         .bento-card h3 {
@@ -222,7 +222,7 @@
         .bento-features li:last-child { border: none; }
 
         .bento-features li::before {
-            content: '✓';
+            content: '+';
             color: var(--accent);
             font-weight: bold;
         }
@@ -231,7 +231,6 @@
             color: var(--accent-light);
         }
 
-        /* Coming Soon Section */
         .coming-section {
             padding: 4rem 3rem 6rem;
             background: var(--surface);
@@ -310,7 +309,6 @@
             100% { background-position: -200% 0; }
         }
 
-        /* What's Not Included */
         .not-included {
             padding: 4rem 3rem 6rem;
             max-width: 900px;
@@ -342,7 +340,11 @@
         }
 
         .not-icon {
-            font-size: 1.25rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            width: 24px;
+            text-align: center;
         }
 
         .not-item h4 {
@@ -355,7 +357,6 @@
             font-size: 0.9rem;
         }
 
-        /* CTA */
         .page-cta {
             padding: 6rem 3rem;
             background: var(--text-dark);
@@ -395,7 +396,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        /* Footer */
         footer {
             padding: 3rem;
             text-align: center;
@@ -430,7 +430,6 @@
             font-size: 0.85rem;
         }
 
-        /* Mobile */
         @media (max-width: 1024px) {
             .bento-grid {
                 grid-template-columns: 1fr 1fr;
@@ -467,30 +466,28 @@
 
     <header class="page-header">
         <h1>Automations that actually make sense</h1>
-        <p>Not every task needs AI. These are the ones that do — and I'll build them custom for your business.</p>
+        <p>Not every task needs AI. These are the ones that do, and I'll build them custom for your business.</p>
     </header>
 
     <section class="bento-section">
         <div class="bento-grid">
-            <!-- Featured large card -->
             <div class="bento-card large featured">
-                <div class="bento-icon">📧</div>
+                <div class="bento-icon">01</div>
                 <h3>Email Autopilot</h3>
-                <p>Your inbox, managed by AI that actually understands context. It reads, sorts, and drafts — you just review and send.</p>
+                <p>Your inbox, managed by AI that actually understands context. It reads, sorts, and drafts. You just review and send.</p>
                 <span class="bento-tag">Most Requested</span>
                 <ul class="bento-features">
                     <li>Smart inbox sorting by priority</li>
                     <li>Draft responses in your voice</li>
                     <li>Flag what needs human attention</li>
-                    <li>Works with Gmail & Outlook</li>
+                    <li>Works with Gmail and Outlook</li>
                 </ul>
             </div>
 
-            <!-- Tall card -->
             <div class="bento-card tall">
-                <div class="bento-icon">🔄</div>
+                <div class="bento-icon">02</div>
                 <h3>Lead Follow-Up</h3>
-                <p>Leads go cold because life gets busy. This bot follows up automatically — personalized, not spammy.</p>
+                <p>Leads go cold because life gets busy. This bot follows up automatically, personalized, not spammy.</p>
                 <span class="bento-tag">Sales</span>
                 <ul class="bento-features">
                     <li>Sequences that feel human</li>
@@ -501,26 +498,26 @@
             </div>
 
             <div class="bento-card">
-                <div class="bento-icon">📝</div>
+                <div class="bento-icon">03</div>
                 <h3>Voice-to-Quote</h3>
                 <p>Record a quick voice note about a job. Get a professional PDF quote. 30 seconds, done.</p>
                 <span class="bento-tag">Contractors</span>
             </div>
 
             <div class="bento-card">
-                <div class="bento-icon">🔗</div>
+                <div class="bento-icon">04</div>
                 <h3>App Connector</h3>
-                <p>Your tools should talk to each other. I'll build the bridges — forms to CRM, invoices to books, calendar to tasks.</p>
+                <p>Your tools should talk to each other. I'll build the bridges: forms to CRM, invoices to books, calendar to tasks.</p>
                 <span class="bento-tag">Operations</span>
             </div>
 
             <div class="bento-card large">
-                <div class="bento-icon">💬</div>
+                <div class="bento-icon">05</div>
                 <h3>AI Customer Support</h3>
                 <p>Answer the same 10 questions 100 times a day? Not anymore. A bot trained on YOUR business handles FAQs 24/7 and knows when to escalate.</p>
                 <span class="bento-tag">Support</span>
                 <ul class="bento-features">
-                    <li>Trained on your docs & FAQs</li>
+                    <li>Trained on your docs and FAQs</li>
                     <li>Natural conversation flow</li>
                     <li>Escalates to human when needed</li>
                 </ul>
@@ -531,7 +528,7 @@
     <section class="coming-section">
         <div class="coming-header">
             <h2>Coming soon</h2>
-            <p>More automations in development — tell me what you need</p>
+            <p>More automations in development. Tell me what you need.</p>
         </div>
         <div class="coming-grid">
             <div class="coming-card">
@@ -560,21 +557,21 @@
         <p>Transparency builds trust. Here's what's outside my scope:</p>
         <div class="not-list">
             <div class="not-item">
-                <span class="not-icon">🚫</span>
+                <span class="not-icon">/</span>
                 <div>
                     <h4>Full custom software development</h4>
                     <p>I build automations, not apps. If you need a full SaaS product built, that's a different conversation.</p>
                 </div>
             </div>
             <div class="not-item">
-                <span class="not-icon">🚫</span>
+                <span class="not-icon">/</span>
                 <div>
                     <h4>Ongoing maintenance contracts</h4>
-                    <p>I build it, teach you how it works, and hand it over. You own it. If it breaks, I'll help — but no retainers.</p>
+                    <p>I build it, teach you how it works, and hand it over. You own it. If it breaks, I'll help, but no retainers.</p>
                 </div>
             </div>
             <div class="not-item">
-                <span class="not-icon">🚫</span>
+                <span class="not-icon">/</span>
                 <div>
                     <h4>Magic solutions for broken processes</h4>
                     <p>AI can't fix a workflow that doesn't make sense. We'll clean up the process first, then automate.</p>
@@ -586,7 +583,7 @@
     <section class="page-cta">
         <h2>Not sure what you need?</h2>
         <p>Let's talk through your workflow. I'll tell you what's worth automating.</p>
-        <a href="./contact.html" class="btn btn-light">Book a free call →</a>
+        <a href="./contact.html" class="btn btn-light">Book a free call</a>
     </section>
 
     <footer>
@@ -596,7 +593,7 @@
             <a href="./process.html">Process</a>
             <a href="./contact.html">Contact</a>
         </div>
-        <p class="footer-copy">© 2026 Flowly · Built in Austin, TX</p>
+        <p class="footer-copy">2026 Flowly. Built in Austin, TX</p>
     </footer>
 
     <script>

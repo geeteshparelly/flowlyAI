@@ -264,7 +264,7 @@
             display: grid;
             grid-template-columns: 1fr 80px 1fr;
             gap: 2rem;
-            align-items: center;
+            align-items: stretch;
             margin-bottom: 3rem;
         }
 
@@ -272,16 +272,23 @@
 
         .process-content {
             background: var(--bg);
-            padding: 2rem;
+            padding: 1.5rem 2rem;
             border-radius: 20px;
             border: 1px solid var(--border);
             transition: all 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .process-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(90, 139, 184, 0.15);
             border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(90, 139, 184, 0.12);
+        }
+
+        .process-content.expanded {
+            background: var(--surface);
         }
 
         .process-item:nth-child(odd) .process-content {
@@ -318,20 +325,53 @@
             color: var(--accent);
             position: relative;
             z-index: 1;
+            align-self: center;
         }
 
         .process-content h3 {
             font-size: 1.4rem;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .process-item:nth-child(odd) .process-content h3 {
+            justify-content: flex-end;
+        }
+
+        .process-content h3::after {
+            content: '+';
+            font-size: 1.2rem;
+            color: var(--accent);
+            transition: transform 0.3s;
+        }
+
+        .process-item:nth-child(odd) .process-content h3::after {
+            order: -1;
+        }
+
+        .process-content.expanded h3::after {
+            transform: rotate(45deg);
         }
 
         .process-content p {
             color: var(--text-muted);
             font-size: 0.95rem;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.3s ease-out;
+            margin-top: 0;
+        }
+
+        .process-content.expanded p {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 0.75rem;
         }
 
         .process-visual {
-            height: 140px;
             background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 100%);
             border-radius: 16px;
             display: flex;
@@ -341,6 +381,12 @@
             font-weight: 700;
             color: var(--surface);
             opacity: 0.9;
+            min-height: 80px;
+        }
+
+        .process-cta {
+            text-align: center;
+            margin-top: 3rem;
         }
 
         /* Demo Section */
@@ -573,7 +619,7 @@
             </p>
             <div class="hero-actions">
                 <a href="./contact.html" class="btn btn-primary">Book a Free Call</a>
-                <a href="#demo" class="btn btn-ghost">Watch Demo</a>
+                <a href="./how-it-works.html" class="btn btn-ghost">The Process</a>
             </div>
         </div>
         <div class="scroll-prompt">
@@ -613,6 +659,9 @@
                 <div class="process-node">3</div>
                 <div class="process-visual">1-2 weeks</div>
             </div>
+        </div>
+        <div class="process-cta">
+            <a href="./how-it-works.html" class="btn btn-ghost">See the full process</a>
         </div>
     </section>
 
@@ -698,6 +747,15 @@
             y: 40, opacity: 0, duration: 1, ease: 'power3.out',
             immediateRender: false,
             scrollTrigger: { trigger: '.manifesto', start: 'top 80%' }
+        });
+
+        // Process item expand/collapse
+        document.querySelectorAll('.process-content').forEach(content => {
+            content.addEventListener('click', () => {
+                const wasExpanded = content.classList.contains('expanded');
+                document.querySelectorAll('.process-content').forEach(c => c.classList.remove('expanded'));
+                if (!wasExpanded) content.classList.add('expanded');
+            });
         });
 
         document.addEventListener('mousemove', (e) => {
